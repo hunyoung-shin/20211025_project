@@ -35,12 +35,6 @@ public class BoardController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
-	@RequestMapping("/board/test.do")
-	public void test() {
-		System.out.println("shyshyshy");
-	}
-	
-	
 	@RequestMapping(value = "/board/boardList.do", method = RequestMethod.GET)
 	public String boardList(Locale locale, Model model,PageVo pageVo, BoardVo boardVo
 			, HttpSession session , HttpServletRequest request) throws Exception{
