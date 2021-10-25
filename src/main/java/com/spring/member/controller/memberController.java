@@ -77,7 +77,6 @@ class memberController {
 		CommonUtil commonUtil = new CommonUtil();
 		HashMap<String, String> result = new HashMap<String, String>();
 		resultCnt = MemberService.memIdCheck(memberVo);
-		System.out.println(resultCnt);
 		if(resultCnt != null) {	
 			exist += 1;
 		}
