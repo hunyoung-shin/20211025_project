@@ -34,6 +34,13 @@ public class BoardController {
 	boardService boardService;
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+	
+	@RequestMapping("/board/test.do")
+	public void test() {
+		System.out.println("asdf");
+	}
+	
+	
 	@RequestMapping(value = "/board/boardList.do", method = RequestMethod.GET)
 	public String boardList(Locale locale, Model model,PageVo pageVo, BoardVo boardVo
 			, HttpSession session , HttpServletRequest request) throws Exception{
@@ -41,7 +48,7 @@ public class BoardController {
 		session = request.getSession();
 		String id = (String)session.getAttribute("userId");
 		String name = (String)session.getAttribute("userName");
-		System.out.println("세션에 담겨져 있는 아이디 : "+id);
+		System.out.println("�꽭�뀡�뿉 �떞寃⑥졇 �엳�뒗 �븘�씠�뵒 : "+id);
 		}
 		catch(Exception e) {}
 							
@@ -116,7 +123,7 @@ public class BoardController {
 	
 		model.addAttribute("board", boardVo);
 		
-		System.out.println("수정완료");
+		System.out.println("�닔�젙�셿猷�");
 		return "board/boardModify";
 	}
 	@RequestMapping(value="/borad/boardModifyAction.do", method = RequestMethod.POST)
@@ -139,7 +146,7 @@ public class BoardController {
 	@RequestMapping(value="/board/boardDelete.do", method = RequestMethod.GET)
 	public String boardDelete(Model model ,BoardVo boardVo, HttpServletRequest request)throws Exception{
 		String boardNum = request.getParameter("Number");
-		System.out.println("넘어옴");
+		System.out.println("�꽆�뼱�샂");
 		System.out.println(boardNum);
 		boardVo.setBoardNum(Integer.parseInt(boardNum));
 		System.out.println(boardVo.getBoardNum());
