@@ -37,7 +37,7 @@ public class BoardController {
 	
 	@RequestMapping("/board/test.do")
 	public void test() {
-		System.out.println("af");
+		System.out.println("afasdasdas");
 	}
 	
 	
