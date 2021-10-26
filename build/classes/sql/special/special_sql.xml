@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="special">
+	<resultMap type="com.spring.special.vo" id="specialVo">
+    	<result property="s_Num" 	column="SPECIAL_NUM"/>
+    	<result property="s_Title" 	column="SPECIAL_TITLE"/>
+    	<result property="s_Image" 	column="SPECIAL_IMAGE"/>
+    	<result property="s_Theme" 	column="SPECIAL_THEME"/>
+    	<result property="s_Notice" 	column="SPECIAL_NOTICE"/>
+    	<result property="s_LinkImg" 	column="LINK_IMG"/>
+    	<result property="s_BrandId" 	column="BRAND_ID"/>
+    	<result property="s_BrandInit" 	column="USER_ID"/>
+    	
+    </resultMap>
+    
+    <resultMap type="com.spring.brand.vo" id="brandVo">
+    	<result property="s_BrandInit" 	column="BRAND_INIT"/>
+    </resultMap>
+    
+    <select id="specialList" parameterType="com.spring.special.vo" resultMap="specialVo">
+    SELECT
+    (
+    SPECIAL_NUM
+    ,SPECIAL_TITLE
+    ,SPECIAL_IMAGE
+    ,SPECIAL_THEME
+    ,SPECIAL_NOTICE
+    ,LINK_IMG
+    ,BRAND_ID
+    ,BRAND_INIT
+    )
+    
+    FROM
+    SPECIAL,BRAND
+    
+    </select>
+</mapper>

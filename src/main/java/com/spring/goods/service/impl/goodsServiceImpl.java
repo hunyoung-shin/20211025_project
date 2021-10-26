@@ -10,9 +10,8 @@ import com.spring.goods.service.GoodsService;
 public class goodsServiceImpl implements GoodsService{
 	@Autowired
 	goodsDao goodsDao; 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+	
+	public void test() throws Exception{
+		
 	}
-
 }

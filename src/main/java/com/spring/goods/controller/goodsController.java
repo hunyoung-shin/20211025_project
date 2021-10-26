@@ -13,7 +13,7 @@ public class goodsController {
 	GoodsService goodsService;
 	
 	@RequestMapping(value="/goods/goodsTest.do")
-	public String test()throws Exception{
+	public String test() throws Exception{
 		System.out.println("나 실행됬음aa!");
 		
 		return "/goods/goodsTest";
