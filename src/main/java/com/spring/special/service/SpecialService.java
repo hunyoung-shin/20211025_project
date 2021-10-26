@@ -9,4 +9,6 @@ public interface SpecialService {
 	public void test()throws Exception;
 	
 	public List<specialVo> selectList()throws Exception;
+	
+	public specialVo speicalView(specialVo specialVo)throws Exception;
 }

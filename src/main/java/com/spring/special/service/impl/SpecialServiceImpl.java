@@ -18,9 +18,16 @@ public class SpecialServiceImpl implements SpecialService{
 	@Override
 	public void test()throws Exception{};
 	
+	@Override
 	public List<specialVo> selectList() throws Exception{
 		
 		return specialDao.selectList();
 		
 	}
+	@Override
+	public specialVo speicalView(specialVo specialVo)throws Exception{
+		
+		
+		return specialDao.specialView(specialVo);
+	};
 }

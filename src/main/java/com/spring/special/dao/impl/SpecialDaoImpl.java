@@ -23,6 +23,13 @@ public class SpecialDaoImpl implements SpecialDao{
 	public List<specialVo> selectList()throws Exception{
 		
 		return session.selectList("special", "specialList");
-	} 
+	}
+	
+	@Override
+	public specialVo speicalView(specialVo specialVo)throws Exception{
+		
+		
+		return session.selectOne("special", "specialView");
+	}
 	
 }

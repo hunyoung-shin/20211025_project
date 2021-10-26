@@ -2,14 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="special">
 	<resultMap type="com.spring.special.vo.specialVo" id="specialVo">
-    	<result property="s_Num" 	column="SPECIAL_NUM"/>
-    	<result property="s_Title" 	column="SPECIAL_TITLE"/>
-    	<result property="s_Image" 	column="SPECIAL_IMAGE"/>
-    	<result property="s_Theme" 	column="SPECIAL_THEME"/>
-    	<result property="s_Notice" 	column="SPECIAL_NOTICE"/>
-    	<result property="s_LinkImg" 	column="LINK_IMG"/>
-    	<result property="s_BrandId" 	column="BRAND_ID"/>
-    	<result property="s_BrandInit" 	column="USER_ID"/>
+    	<result property="s_num" 	column="SPECIAL_NUM"/>
+    	<result property="s_title" 	column="SPECIAL_TITLE"/>
+    	<result property="s_image" 	column="SPECIAL_IMAGE"/>
+    	<result property="s_theme" 	column="SPECIAL_THEME"/>
+    	<result property="s_notice" 	column="SPECIAL_NOTICE"/>
+    	<result property="s_linkImg" 	column="LINK_IMG"/>
+    	<result property="s_brandId" 	column="BRAND_ID"/>
+    	<result property="s_brandInit" 	column="USER_ID"/>
     	
     </resultMap>
     
@@ -31,6 +31,12 @@
     
     FROM
     SPECIAL
+    </select>
+    
+    <select id="specialView" parameterType="com.spring.special.vo.specialVo" resultMap="specialVo">
+    
+    
+    
     
     </select>
 </mapper>

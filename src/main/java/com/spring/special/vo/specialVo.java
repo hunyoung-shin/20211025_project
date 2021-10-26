@@ -3,63 +3,61 @@ package com.spring.special.vo;
 public class specialVo {
 
 	private int s_Num;
-	private String s_Title;
-	private String s_Image;
-	private String s_Theme;
-	private String s_Notice;
-	private String s_LinkImg;
-	private String s_BrandId;
-	private String s_BrandInit;
-	
+	private String s_title;
+	private String s_image;
+	private String s_theme;
+	private String s_notice;
+	private String s_linkImg;
+	private String s_brandId;
+	private String s_brandInit;
 	public int getS_Num() {
 		return s_Num;
 	}
 	public void setS_Num(int s_Num) {
 		this.s_Num = s_Num;
 	}
-	public String getS_Title() {
-		return s_Title;
+	public String getS_title() {
+		return s_title;
 	}
-	public void setS_Title(String s_Title) {
-		this.s_Title = s_Title;
+	public void setS_title(String s_title) {
+		this.s_title = s_title;
 	}
-	public String getS_Image() {
-		return s_Image;
+	public String getS_image() {
+		return s_image;
 	}
-	public void setS_Image(String s_Image) {
-		this.s_Image = s_Image;
+	public void setS_image(String s_image) {
+		this.s_image = s_image;
 	}
-	public String getS_Theme() {
-		return s_Theme;
+	public String getS_theme() {
+		return s_theme;
 	}
-	public void setS_Theme(String s_Theme) {
-		this.s_Theme = s_Theme;
+	public void setS_theme(String s_theme) {
+		this.s_theme = s_theme;
 	}
-	public String getS_Notice() {
-		return s_Notice;
+	public String getS_notice() {
+		return s_notice;
 	}
-	public void setS_Notice(String s_Notice) {
-		this.s_Notice = s_Notice;
+	public void setS_notice(String s_notice) {
+		this.s_notice = s_notice;
 	}
-	public String getS_LinkImg() {
-		return s_LinkImg;
+	public String getS_linkImg() {
+		return s_linkImg;
 	}
-	public void setS_LinkImg(String s_LinkImg) {
-		this.s_LinkImg = s_LinkImg;
+	public void setS_linkImg(String s_linkImg) {
+		this.s_linkImg = s_linkImg;
 	}
-	public String getS_BrandId() {
-		return s_BrandId;
+	public String getS_brandId() {
+		return s_brandId;
 	}
-	public void setS_BrandId(String s_BrandId) {
-		this.s_BrandId = s_BrandId;
+	public void setS_brandId(String s_brandId) {
+		this.s_brandId = s_brandId;
 	}
-	public String getS_BrandInit() {
-		return s_BrandInit;
+	public String getS_brandInit() {
+		return s_brandInit;
 	}
-	public void setS_BrandInit(String s_BrandInit) {
-		this.s_BrandInit = s_BrandInit;
+	public void setS_brandInit(String s_brandInit) {
+		this.s_brandInit = s_brandInit;
 	}
 	
-
-
+	
 }
