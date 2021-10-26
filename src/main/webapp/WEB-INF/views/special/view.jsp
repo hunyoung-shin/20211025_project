@@ -4,11 +4,25 @@
 <html>
 <head>
 <title>Insert title here</title>
+<title>onload</title>
+<script type="text/javascript">
+	function title(){
+		document.title = ${sessionscope.}
+	
+</script>
+
+
+
 </head>
+
 <body>
 <div class="wrap fixed shop">
 
 
 </div>
+=======
+<body>
+<h1>Test!!!!</h1>
+
 </body>
 </html>
