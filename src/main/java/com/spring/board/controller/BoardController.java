@@ -49,6 +49,7 @@ public class BoardController {
 		List<BoardVo> boardList = new ArrayList<BoardVo>();
 		List<BoardVo> comCode = new ArrayList<BoardVo>();
 		
+		
 		int page = 1;
 		int totalCnt = 0;
 		
