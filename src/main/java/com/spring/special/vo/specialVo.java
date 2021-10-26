@@ -8,7 +8,8 @@ public class specialVo {
 	private String s_Theme;
 	private String s_Notice;
 	private String s_LinkImg;
-	private String s_Brand_id;
+	private String s_BrandId;
+	private String s_BrandInit;
 	
 	public int getS_Num() {
 		return s_Num;
@@ -46,11 +47,17 @@ public class specialVo {
 	public void setS_LinkImg(String s_LinkImg) {
 		this.s_LinkImg = s_LinkImg;
 	}
-	public String getS_Brand_id() {
-		return s_Brand_id;
+	public String getS_BrandId() {
+		return s_BrandId;
 	}
-	public void setS_Brand_id(String s_Brand_id) {
-		this.s_Brand_id = s_Brand_id;
+	public void setS_BrandId(String s_BrandId) {
+		this.s_BrandId = s_BrandId;
+	}
+	public String getS_BrandInit() {
+		return s_BrandInit;
+	}
+	public void setS_BrandInit(String s_BrandInit) {
+		this.s_BrandInit = s_BrandInit;
 	}
 	
 
