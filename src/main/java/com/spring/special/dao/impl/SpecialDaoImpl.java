@@ -26,7 +26,7 @@ public class SpecialDaoImpl implements SpecialDao{
 	}
 	
 	@Override
-	public specialVo speicalView(specialVo specialVo)throws Exception{
+	public specialVo specialView(specialVo specialVo)throws Exception{
 		
 		
 		return session.selectOne("special", "specialView");

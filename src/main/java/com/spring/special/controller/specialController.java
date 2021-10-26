@@ -31,6 +31,7 @@ public class specialController {
 	}
 	
 	
+	
 	//LIST
 	@RequestMapping(value="/special/list.do", method = RequestMethod.GET)
 	public String specialList(HttpSession session, specialVo specialVo)throws Exception{

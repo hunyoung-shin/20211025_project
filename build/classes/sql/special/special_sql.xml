@@ -36,7 +36,5 @@
     <select id="specialView" parameterType="com.spring.special.vo.specialVo" resultMap="specialVo">
     
     
-    
-    
     </select>
 </mapper>

@@ -10,6 +10,7 @@ public interface SpecialDao {
 	
 	public List<specialVo> selectList()throws Exception;
 	
-	public specialVo speicalView(specialVo specialVo)throws Exception;
+	public specialVo specialView(specialVo specialVo)throws Exception;
+	
 	
 }

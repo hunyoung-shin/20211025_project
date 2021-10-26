@@ -11,4 +11,5 @@ public interface SpecialService {
 	public List<specialVo> selectList()throws Exception;
 	
 	public specialVo speicalView(specialVo specialVo)throws Exception;
+	
 }
