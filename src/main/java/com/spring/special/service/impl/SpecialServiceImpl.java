@@ -1,10 +1,13 @@
 package com.spring.special.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.spring.special.dao.SpecialDao;
 import com.spring.special.service.SpecialService;
+import com.spring.special.vo.specialVo;
 
 @Service
 public class SpecialServiceImpl implements SpecialService{
@@ -14,4 +17,10 @@ public class SpecialServiceImpl implements SpecialService{
 	
 	@Override
 	public void test()throws Exception{};
+	
+	public List<specialVo> selectList() throws Exception{
+		
+		return specialDao.selectList();
+		
+	}
 }
