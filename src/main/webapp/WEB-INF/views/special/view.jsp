@@ -6,7 +6,7 @@
 <title>shop shop</title>
 <script type="text/javascript">
 	function title(){
-		var str = "[]";
+		var str = "[";
 		str += ${sessionscope.BrandInit};
 		str += "] ";
 		str += ${sessionscope.Title};
@@ -15,12 +15,10 @@
 	}
 </script>
 
-
-
 </head>
 
 <body>
-<div class="wrap fixed shop">
+<div class="wrapper">
 
 
 </div>
