@@ -27,8 +27,8 @@
 	</beans:bean>
 		
 	<context:component-scan base-package="com.spring.board.controller" />
-	<context:component-scan base-package="com.spring.special.controller" />
 	<context:component-scan base-package="com.spring.member.controller" />
 	<context:component-scan base-package="com.spring.goods.controller"/>
+	<context:component-scan base-package="com.spring.special.controller" />
 
 </beans:beans>

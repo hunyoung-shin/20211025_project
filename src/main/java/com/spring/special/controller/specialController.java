@@ -28,12 +28,13 @@ public class specialController {
 	}
 	
 	//List 조회
-	@RequestMapping(value="/special/list.do", method = RequestMethod.GET)
+	@RequestMapping(value="/special/view.do", method = RequestMethod.GET)
 	public String specialList()throws Exception{
+		
 		List<specialVo> s_list = new ArrayList();
 		s_list = specialService.selectList();
-		
-		return null;
+		System.out.println(s_list);
+		return "/special/view";
 	}
 	
 	
@@ -41,7 +42,6 @@ public class specialController {
 	//CREATE
 	@RequestMapping(value="/special/makeGoods.do")
 	public String makeGoods()throws Exception{
-		
 		
 		return null;
 	}

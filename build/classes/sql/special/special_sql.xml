@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="special">
-	<resultMap type="com.spring.special.vo" id="specialVo">
+	<resultMap type="com.spring.special.vo.specialVo" id="specialVo">
     	<result property="s_Num" 	column="SPECIAL_NUM"/>
     	<result property="s_Title" 	column="SPECIAL_TITLE"/>
     	<result property="s_Image" 	column="SPECIAL_IMAGE"/>
@@ -13,11 +13,11 @@
     	
     </resultMap>
     
-    <resultMap type="com.spring.brand.vo" id="brandVo">
+  <!--   <resultMap type="com.spring.brand.vo" id="brandVo">
     	<result property="s_BrandInit" 	column="BRAND_INIT"/>
-    </resultMap>
+    </resultMap> -->
     
-    <select id="specialList" parameterType="com.spring.special.vo" resultMap="specialVo">
+    <select id="specialList" parameterType="com.spring.special.vo.specialVo" resultMap="specialVo">
     SELECT
     (
     SPECIAL_NUM
@@ -27,11 +27,10 @@
     ,SPECIAL_NOTICE
     ,LINK_IMG
     ,BRAND_ID
-    ,BRAND_INIT
     )
     
     FROM
-    SPECIAL,BRAND
+    SPECIAL
     
     </select>
 </mapper>
