@@ -11,11 +11,16 @@ public class specialController {
 
 	SpecialService specialService;
 	
-	@RequestMapping(value="/special/goodsTest.do", method = RequestMethod.GET)
-	public String test()throws Exception{
-		System.out.println("나 실행됬음aa!");
+	@RequestMapping(value="/special/list.do", method = RequestMethod.GET)
+	public String specialList() throws Exception{
 		
-		return "/goods/goodsTest";
+		return "special/list";
+	}
+	
+	@RequestMapping(value = "special/view.do", method = RequestMethod.GET)
+	public String specialView() throws Exception{
+		
+		return "special/view";
 	}
 	
 	//CREATE
