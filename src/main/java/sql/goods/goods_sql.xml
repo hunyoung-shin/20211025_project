@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="goods">
-	<resultMap type="com.spring.goods.vo.goodsVo" id="goodsVo">
+	<resultMap type="com.spring.goods.vo.GoodsVo" id="goodsVo">
     	 <result property="g_Num" column="GOODS_NUM"/>
 		 <result property="br_Id" column="BRAND_ID"/>
 		 <result property="g_Name" column="GOODS_NAME"/>
@@ -17,7 +17,7 @@
     </resultMap>
 	
 	<!-- 상품리스트 -->
-	<select id="goodsList" parameterType="com.spring.goods.vo.goodsVo" resultMap="goodsVo">
+	<select id="goodsList" parameterType="com.spring.goods.vo.GoodsVo" resultMap="goodsVo">
 		SELECT
 			GOODS_NUM
 			,BRAND_ID
@@ -37,7 +37,7 @@
 	</select>
 	
 	
-	<select id="goodsAdd" parameterType="com.spring.goods.vo.goodsVo" >
+	<select id="goodsAdd" parameterType="com.spring.goods.vo.GoodsVo" >
     	INSERT INTO
     	GOODS(
 	    	GOODS_NUM
@@ -70,7 +70,7 @@
 			)
     </select>
     
-    <select id="goodsDel" parameterType="com.spring.goods.vo.goodsVo" >
+    <select id="goodsDel" parameterType="com.spring.goods.vo.GoodsVo" >
     DELETE 
     	FROM GOODS
 	WHERE 

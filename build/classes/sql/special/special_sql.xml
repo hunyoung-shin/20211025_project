@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="special">
-	<resultMap type="com.spring.special.vo.specialVo" id="specialVo">
+	<resultMap type="com.spring.special.vo.SpecialVo" id="specialVo">
     	<result property="s_num" 	column="SPECIAL_NUM"/>
     	<result property="s_title" 	column="SPECIAL_TITLE"/>
     	<result property="s_image" 	column="SPECIAL_IMAGE"/>
@@ -14,7 +14,7 @@
     </resultMap>
     
     
-    <resultMap type="com.spring.brand.vo.brandVo" id="brandVo">
+    <resultMap type="com.spring.brand.vo.BrandVo" id="brandVo">
     	<result property="br_Init" 	column="BRAND_INIT"/>
     	<result property="br_Id" 	column="BRAND_ID"/>
     	<result property="br_Name" 	column="BRAND_NAME"/>
@@ -23,7 +23,7 @@
     
     
     <!-- 기획전페이지  -->
-    <select id="specialList" parameterType="com.spring.special.vo.specialVo" resultMap="specialVo">
+    <select id="specialList" parameterType="com.spring.special.vo.SpecialVo" resultMap="specialVo">
 	    SELECT
 		    SPECIAL_NUM
 		    ,SPECIAL_TITLE
@@ -43,7 +43,7 @@
     </select>
     
     <!--디테일 페이지  -->
-    <select id="specialView" parameterType="com.spring.special.vo.specialVo" resultMap="specialVo">
+    <select id="specialView" parameterType="com.spring.special.vo.SpecialVo" resultMap="specialVo">
 		SELECT
 			BAN_IMG
 			,GOODS_CLASSIFY
@@ -67,7 +67,7 @@
     </select>
     
     <!-- 기획전추가 -->
-    <select id="specialAdd" parameterType="com.spring.special.vo.specialVo" >
+    <select id="specialAdd" parameterType="com.spring.special.vo.SpecialVo" >
     	INSERT INTO
     	SPECIAL(
 	    	SPECIAL_NUM
@@ -93,7 +93,7 @@
     </select>
     
     <!-- 기획전삭제 -->
-    <select id="specialDelete" parameterType="com.spring.special.vo.specialVo" >
+    <select id="specialDelete" parameterType="com.spring.special.vo.SpecialVo" >
     DELETE 
     	FROM SPECIAL
 	WHERE 
