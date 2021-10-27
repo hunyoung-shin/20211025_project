@@ -13,5 +13,6 @@ public class SpecialDaoImpl implements SpecialDao{
 	SqlSession session;
 	
 	@Override
-	public void test()throws Exception{};
+	public void test()throws Exception{
+	};
 }

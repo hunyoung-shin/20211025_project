@@ -15,6 +15,7 @@ public class specialController {
 	public String test()throws Exception{
 		System.out.println("나 실행됬음aa!");
 		
+		
 		return "/goods/goodsTest";
 	}
 	

@@ -9,14 +9,13 @@
     	<result property="s_Notice" 	column="SPECIAL_NOTICE"/>
     	<result property="s_LinkImg" 	column="LINK_IMG"/>
     	<result property="s_BrandId" 	column="BRAND_ID"/>
-    	<result property="s_BrandInit" 	column="USER_ID"/>
     	
     </resultMap>
     
-    <resultMap type="com.spring.brand.vo" id="brandVo">
+    <!-- <resultMap type="com.spring.brand.vo" id="brandVo">
     	<result property="s_BrandInit" 	column="BRAND_INIT"/>
     </resultMap>
-    
+     -->
     <select id="specialList" parameterType="com.spring.special.vo" resultMap="specialVo">
     SELECT
     (
@@ -27,11 +26,10 @@
     ,SPECIAL_NOTICE
     ,LINK_IMG
     ,BRAND_ID
-    ,BRAND_INIT
     )
     
     FROM
-    SPECIAL,BRAND
+    SPECIAL
     
     </select>
 </mapper>
