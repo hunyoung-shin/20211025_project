@@ -1,162 +1,196 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" isELIgnored="false"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<%@include file="/WEB-INF/views/common/common.jsp"%>
+<%@ page import="java.util.*"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-	<title>shop shop</title>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-	<meta name="description" content="" />
-	<meta name="keywords" content="" />
-	<link rel="stylesheet"  href="/resources/assets/css/main.css" />
-	<style>
-		*{margin: 0;padding: 0;}
-		header {display: inline-block; float:right;}
-		body {text-align: center;}
-		div#wrapper{text-align: left; width: 800px; margin: 0 auto;}
-		header, footer, aside, nav, section, article{display: block; margin-top: 10px;}
-		header, nav, footer{width: 100%;}
-		aside{width:20%; float: left;}
-		section{margin-bottom: 10px; width: 80%; float: right;}
-		article{width:90%; margin: 10px;}
- 		.nav ul li {list-style-type:none; float:left; margin-left: 20px;]}
- 		.asideMenu ul li {list-style:none; margin-bottom: 10px;}
- 		footer {width: 100%; background-color: black; float: left; }
-	</style>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>boardWrite</title>
 </head>
-<body class="is-preload">	
-	<div id="wrapper">
-	<!-- Header -->
-		<header class="header">
-			<a href="/main">
-				<h2>ICTCOOP shop</h2>
-			</a>
-		</header>
-	<!-- nav -->
-		<nav class="nav">
-				<ul>
-					<c:if test="${sessionscope.memberId } != null">
-						<li>
-							${sessionscope.memberId } ë‹˜
-						</li>
-						<li>
-							ë§ˆì´í˜ì´ì§€
-						</li>
-						<li>
-							ì¥ë°”êµ¬ë‹ˆ
-						</li>
-					</c:if>
-					<c:otherwise>
-						<li>
-							<a href="/member/memberLogin.do" >ë¡œê·¸ì¸</a>
-						</li>
-						<li>
-							<a href="/member/memberSignUp.do" >íšŒì›ê°€ì…</a>
-						</li>
-					</c:otherwise>
-				</ul>
-			</nav>
-		<br/>
-		<hr/>
-		<!-- aside -->
-			<aside class="asideMenu">
-				<ul class="big">
-					<li>
-						<a href="">WOMEN</a>
-					</li>
-					<li>
-						<a href="">MAN</a>
-					</li>
-					<li>
-						<a href="">LIFE</a>
-					</li>
-					<li>
-						<a href="">BEAUTY</a>
-					</li>
-				</ul>
-				<hr/>
-				<ul class="adminUl">
-					<li>
-						<a href="/special/makeSpeicalPage.do">ê¸°íšì „ ì‘ì„±</a>
-					</li>
-					<li>
-						<a href="javascript:void(0);" onclick="addGoods();return false;">ê¸°íšì „ ìƒí’ˆì¶”ê°€</a>
-					</li>
-				</ul>
-				<ul class="memberUl">
-					<li>
-						<a href="/board/boardList.do">ê²Œì‹œíŒ</a>
-					</li>
-				</ul>
-			</aside>
-		<script type="text/javascript">
-			function addGoods(){
-				document.specialInfo.method = "get";
-				document.specialInfo.action = "/special/makeSpeicalGoods.do";
+
+<script>
+	$j(document).ready(function(){
+			var i = 0;
+			var count = 0;
+			var index = 0;
+		
+			
+		$j("#submit").on("click",function(){
+			var arr = new Array();
+			var $frm = $j('.boardWrite :input');
+			list = $frm;
+			alert(list);
+			$j.ajax({
+			    url : "/board/boardWriteAction.do",
+			    dataType: "json",
+			    type: "POST",
+			    data : list,
+			    
+			    success: function(data, textStatus, jqXHR)
+			    {
+					alert("ÀÛ¼º¿Ï·á");
+					
+					alert("¸Ş¼¼Áö:"+data.success);
+					
+					location.href = "/board/boardList.do?pageNo=1";
+			    },
+			    error: function (jqXHR, textStatus, errorThrown)
+			    {
+			    	alert("½ÇÆĞ");
+			    	
+			    	
+			    }
+			});
+		});
+		//Æû Ãß°¡
+		$j("#addForm").on("click", function(){
+			count = $j("tr").length;
+			i += 1;
+			var html = "";
+			//html +='<table border="1" id="mytable" align="center">';
+			html +='<tr class ='+i+' bgcolor="gray">';
+			html +='<td width="120" align="center">Type</td>';
+			html +='<td width="400">';
+			html += '<select name="boardVoList['+i+'].boardType">';
+			html += '<c:forEach items="${comCode}" var="list">';
+			html += '<option value ="${list.codeId}">${list.codeName}</option>';
+			html += '</c:forEach>';
+			html += '</select>';
+			html +='</td></tr>'
+			
+			html +='<tr class ='+i+'>';
+			html +='<td width="120" align="center">Title</td><td width="400">';
+			html +='<input name="boardVoList['+i+'].boardTitle" type="text" size="50" value="${board.boardTitle}">';
+			html +='</td></tr>';
+			
+			html +='<tr class ='+i+'><td height="300" align="center">Comment</td>';
+			html +='<td valign="top">';
+			html +='<textarea name="boardVoList['+i+'].boardComment"rows="20" cols="55">${board.boardComment}</textarea></td>'	;
+			html +='</tr>';
+			
+		/* 	html +='<tr class ='+i+'>';
+			html +='<td width="120"align="center">Writer</td>';
+			html +='<td width="400">${sessionScope.userName}</td>';	
+			html +='</tr>'
+			 */
+			html +='<tr class ='+i+'>';
+			html +='<td align="right" colspan ="2"><input type=button value="»èÁ¦" id="selectDel"></td>';
+			html +='</tr>';
+			//html +='</table>';
+			
+			$j('#myTable').append(html);
+			//$j('#mainTable').append('<table border ="1" id ="myTable" align="center"><tr id ='+i+'><td width="120" align="center">Title</td><td width="400"><input name="boardVoList['+i+'].boardTitle" type="text" size="50" value="${board.boardTitle}"></td></tr>');
+			//$j('#tbody').append('<tr id ='+i+'><td height="300" align="center">Comment</td><td valign="top"><textarea name="boardVoList['+i+'].boardComment"rows="20" cols="55">${board.boardComment}</textarea></td></tr>');
+			//$j('#tbody').append('<tr id ='+i+'><td align="right" colspan ="2"><input type=button value="»èÁ¦" id="selectDel"></td></tr></table>');
+			//console.log("ÇöÀç i ÀÇ °ªÀº? : "+ i);
+			console.log("ÇöÀç trÀÇ °¹¼ö´Â? :"+count);
+		});
+		
+		$j(document).on("click","#formDel", function(){
+			console.log("Á¦°ÅÀü i ÀÇ °ªÀº? : "+ i);
+			msg ="Å×ÀÌºíÀ» »èÁ¦ÇÏ½Ã°Ú½À´Ï±î? (¸Ç ¹Ø Å×ÀÌºíÀÌ »èÁ¦µË´Ï´Ù.)"
+			if(i > 0){
+				pop = confirm(msg)
+				if(pop == true){
+					var test1 = document.getElementsByTagName('tr');
+					var delclass = $j(test1[test1.length-1]).attr('class');
+					$j("."+delclass).remove();						
+					
+					//$j("."+findClass).remove();
+					i -= 1;
+					if(i > 0){
+					count = $j("tr").length;
+					//console.log("Á¦°Å ÈÄ i ÀÇ °ªÀº? : "+ i);
+					//console.log("ÇöÀç trÀÇ °¹¼ö´Â? :"+count);
+						}
+				}
 			}
-		</script>
-		<!-- Main -->
-			<section>
-				<article class="content">
-					<form name="specialInfo" class="specialInfo">
-						<a href="/special/list.do">ê¸°íšì „</a>
-						<span>
-							> [${sessionscope.s_brandInit }] ${sessionscope.s_title }
-						</span>
-						<c:if test="${sessionscope.s_brandInit } != null">
-							<input type="hidden" id="s_brandInit" value="${sessionscope.s_brandInit }">
-						</c:if>
-						<c:if test="${sessionscope.s_title } != null">
-							<input type="hidden" id="s_title" value="${sessionscope.s_title }">
-						</c:if>
-					</form>
-				</article>
-				<article class="imgBan">
-					<div class="innerImgBan">
-						<div class="contentImgBan">
-							<p>ìƒí’ˆ ì´ë¯¸ì§€ ë°°ë„ˆ ëª¨ìŒ</p>
-		 					<%--	<c:forEach items="${ }" var="list"> --%>
-							<!-- 		asd -->
-							<%-- 	</c:forEach> --%>
-						</div>
-					</div>
-				</article>
-				<br/>
-				<article class="specialBan">
-					<div class="innerSpecialBan">
-						<div class="contentSpecialBan">
-							<p>ë¸Œëœë“œ ë‚´ íƒ€ ê¸°íšì „ ì´ë™ ì´ë¯¸ì§€ ë°°ë„ˆ(ìµœê·¼ë¶€í„° ìµœëŒ€ 3ê°œ)</p>
-						</div>
-					</div>	
-				</article>
-				<hr/>
-				<br/>
-				<hr/>
-				<article class="specialTab">
-					<div class="tabContent">
-							íƒ­(ì´ë²¤íŠ¸, ìƒí’ˆ ì¢…ë¥˜)
-						</div>
-				</article>
-				<br/>
-				<article class="specialGoods">
-					<div class="goods">
-							ì„¸ë¶€ ìƒí’ˆ í•­ëª©(ìƒí’ˆì¢…ë¥˜ì™€ ì¼ì¹˜í•˜ëŠ” ê²ƒë§Œ ê°€ì ¸ì˜¬ ê²ƒ)
-					</div>
-				</article>
-			</section>
-			<hr />
-		<!-- Footer -->
-			<footer class="footer">
-				<div class="inner">
-					<div class="content">
-						<section>
-							<h3>ICTCOOP shop</h3>
-							<p>ã…ã…‡</p>
-						</section>
-					</div>
-				</div>
-			</footer>
-		</div>
-	</body>
+		
+		});
+		
+		$j(document).on("click","#selectDel",function(){
+			var msg = "Á¤¸» »èÁ¦ÇÏ½Ã°Ú½À´Ï±î?"
+			var pop = confirm(msg)
+			if(pop == true){
+				var aa = $j(this).closest('tr')
+				var dd = aa.attr("class")
+				$j("."+dd).remove();
+			}
+		});
+		
+		$j(document).on("click","#test1",function(){
+			var aaa = $j("#myTable").children()
+			var sss = aaa.attr("class")
+			console.log(aaa);
+			console.log(sss);
+			
+			
+		})
+		
+		
+		
+	});
+
+</script>
+<body>
+<head>
+
+</head>
+
+<form class="boardWrite" onsubmit=check();>
+	
+				<table border ="1" id ='myTable' align='center'>
+					<tr bgcolor ="gray">
+						<td align="right" colspan ="2">
+							<input type="button" value="Textarea »èÁ¦" id="formDel">
+							<input type="button" VALUE="Textarea Ãß°¡" id="addForm">
+							<input id="submit" type="button" value="ÀÛ¼º">
+							<input type="button" value="¸®½ºÆ®"onclick="location.href='/board/boardList.do'">
+						</td>
+					</tr>
+						<tr bgcolor='gray'><td width="120" align="center">Type</td><td>
+							<select name="boardVoList[0].boardType" style="bg:gray">
+								<c:forEach items="${comCode}" var="list">
+									<option value ="${list.codeId}">${list.codeName}</option>	
+								</c:forEach>
+							</select> 
+						</td>
+					</tr>
+						<td width="120" align="center">
+						Title
+						</td>
+						<td width="400">
+						<input name="boardVoList[0].boardTitle" type="text" size="48" value="${board.boardTitle}">
+						</td> 
+					</tr>
+					<tr>
+						<td height="300" align="center">
+						Comment
+						</td>
+						<td valign="top">
+						<textarea name="boardVoList[0].boardComment" rows ="20" cols="60">${board.boardComment}</textarea>
+						</td>
+					</tr>
+					<input name="creator" type="hidden" size="48" value="${sessionScope.userId}">
+					<%-- <tr>
+						<td width="120"align="center">Writer</td>
+						<td width="400">${sessionScope.userName}</td>
+					</tr> --%>
+				
+				</table>
+				<table border ="1" align='center'>
+					<footer>
+						<tr>
+							<td width="120"align="center">Writer</td>
+							<td width="458">${sessionScope.userName}</td>
+						</tr>
+					</footer>
+				</table>
+			
+</form>	
+</body>
+
+
+
 </html>
