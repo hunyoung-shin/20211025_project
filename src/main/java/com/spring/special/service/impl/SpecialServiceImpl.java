@@ -37,7 +37,7 @@ public class SpecialServiceImpl implements SpecialService{
 	@Override
 	   public int specialDelete(specialVo specialVo) throws Exception {
 	      // TODO Auto-generated method stub
-	      return session.delete("special.specialDelete",specialVo);
+	      return specialDao.specialDelete(specialVo);
 	   }
 	
 }

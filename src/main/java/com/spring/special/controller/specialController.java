@@ -82,7 +82,7 @@ public class specialController {
 		int delSpecial = 0;
 		delSpecial = specialService.specialDelete(specialVo);
 				
-		return null;
+		return "/special/list.do";
 	}
 	
 	//UPDATE

@@ -40,7 +40,6 @@ public class SpecialDaoImpl implements SpecialDao{
 	@Override
 	public int specialDelete(specialVo specialVo) throws Exception{
 		
-		
 		return session.delete("special.specialDelete", specialVo);
 	}
 	
