@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.spring.brand.vo.BrandVo;
 import com.spring.special.dao.SpecialDao;
 import com.spring.special.service.SpecialService;
 import com.spring.special.vo.SpecialVo;
@@ -40,4 +41,19 @@ public class SpecialServiceImpl implements SpecialService{
 	      return specialDao.specialDelete(specialVo);
 	   }
 	
+	@Override
+	public List<String> s_themeList()throws Exception{
+		return specialDao.s_themeList();
+	}
+	
+	@Override
+	public List<SpecialVo> s_specialList()throws Exception{
+		return specialDao.s_specialList();
+	}
+	
+	@Override
+	public List<BrandVo> s_brandList()throws Exception{
+		return specialDao.s_brandList();
+		
+	}
 }

@@ -33,7 +33,13 @@ public class specialController {
 		// brandVo 가져올 필요가 있음 -> theme도 brandVo에 넣어서 가져올 수 있도록(또는 새로 db table 생성)
 		List<String> themeList = new ArrayList<String>();
 		List<SpecialVo> specialList = new ArrayList<SpecialVo>();
-		
+		List<BrandVo> brandList = new ArrayList<BrandVo>();
+
+		/*
+		 * themeList = specialService.s_themeList(); specialList =
+		 * specialService.s_specialList(); brandList = specialService.s_brandList();
+		 */
+		 
 		/*service에서 db까지 왔다갔다 할 3개
 		 brandVo
 		 themeList
