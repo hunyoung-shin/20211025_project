@@ -48,25 +48,27 @@
 		<!-- nav -->
 			<nav class="nav">
 				<ul>
-					<c:if test="${sessionscope.memberId } != null">
-						<li>
-							${sessionscope.memberId } 님
-						</li>
-						<li>
-							마이페이지
-						</li>
-						<li>
-							장바구니
-						</li>
-					</c:if>
-					<c:otherwise>
-						<li>
-							<a href="/member/memberLogin.do" >로그인</a>
-						</li>
-						<li>
-							<a href="/member/memberSignUp.do" >회원가입</a>
-						</li>
-					</c:otherwise>
+					<c:choose>
+						<c:when test="${not empty sessionscope.memberId}">
+							<li>
+								${sessionscope.memberId } 님
+							</li>
+							<li>
+								마이페이지
+							</li>
+							<li>
+								장바구니
+							</li>
+						</c:when>
+						<c:otherwise>
+							<li>
+								<a href="/member/memberLogin.do" >로그인</a>
+							</li>
+							<li>
+								<a href="/member/memberSignUp.do" >회원가입</a>
+							</li>
+						</c:otherwise>
+					</c:choose>
 				</ul>
 			</nav>
 			<br/>

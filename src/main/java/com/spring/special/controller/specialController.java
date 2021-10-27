@@ -37,7 +37,7 @@ public class specialController {
 	}
 	
 	//VIEW
-	@RequestMapping(value="/special/view.do", method = RequestMethod.GET)
+	@RequestMapping(value="/special/{s_num}/view.do", method = RequestMethod.GET)
 	public String specialview(HttpSession session, SpecialVo specialVo
 			,@RequestParam("s_num")int s_num)throws Exception{
 		
