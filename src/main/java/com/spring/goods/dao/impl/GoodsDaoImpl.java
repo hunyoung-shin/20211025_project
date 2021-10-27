@@ -11,4 +11,5 @@ public class GoodsDaoImpl implements GoodsDao {
 
 	@Autowired
 	SqlSession session;
+	
 }

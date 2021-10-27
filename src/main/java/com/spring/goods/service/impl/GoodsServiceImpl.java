@@ -10,6 +10,6 @@ import com.spring.goods.service.GoodsService;
 public class GoodsServiceImpl implements GoodsService{
 	@Autowired
 	GoodsDao goodsDao;
-	
+	 
 	
 }
