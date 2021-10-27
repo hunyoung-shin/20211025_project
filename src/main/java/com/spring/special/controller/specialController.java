@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.spring.special.service.SpecialService;
 import com.spring.special.vo.SpecialVo;
@@ -33,7 +34,7 @@ public class specialController {
 				System.out.println("============================================");
 				System.out.println("에러는 : "+e.getMessage().toString());;
 			}
-		return null;
+		return "/special/list";
 	}
 	
 	//VIEW
@@ -60,21 +61,34 @@ public class specialController {
 	
 	
 	// 기획전내 상품 추가
-	@RequestMapping(value="/special/makeSpeicalGoods.do", method = RequestMethod.GET)
-		public String makeSpecialGoods(SpecialVo specialVo, Model model) throws Exception{
+	@RequestMapping(value="/special/makeSpecialGoods.do", method = RequestMethod.GET)
+	public String makeSpecialGoods(SpecialVo specialVo, Model model) throws Exception{
 		
 		model.addAttribute("s_title", specialVo.getS_title());
 		model.addAttribute("s_brandInit", specialVo.getS_brandInit());
 		
-		return "/special/makeGoods";
+	return "/special/makeGoods";
+	}
+	@RequestMapping(value="/special/makeSpecialGoodsAction.do",method = RequestMethod.GET)
+	@ResponseBody
+	public String makeSpecialGoodsAction() throws Exception{
+	
+		return "안만듬 아직";
 	}
 
-	// 새 기획전 CREATE
-	@RequestMapping(value="/special/makeSpeicalPage.do",method = RequestMethod.GET)
-		public String makeSpecialPage() throws Exception{
+	// 새 기획전 CREATE PAGE
+	@RequestMapping(value="/special/makeSpecialPage.do",method = RequestMethod.GET)
+	public String makeSpecialPage() throws Exception{
 		
 		return "/special/makeSpecial";
 	}
+	@RequestMapping(value="/special/makeSpecialPageAction.do",method = RequestMethod.GET)
+	@ResponseBody
+	public String makeSpecialPageAction() throws Exception{
+	
+		return "안만듬 아직";
+	}
+	
 	//DELETE
 	@RequestMapping(value="/special/delSpecial.do")
 	public String delSpecial(SpecialVo specialVo)throws Exception{
