@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.spring.special.dao.SpecialDao;
 import com.spring.special.service.SpecialService;
-import com.spring.special.vo.specialVo;
+import com.spring.special.vo.SpecialVo;
 
 @Service
 public class SpecialServiceImpl implements SpecialService{
@@ -19,23 +19,23 @@ public class SpecialServiceImpl implements SpecialService{
 	public void test()throws Exception{};
 	
 	@Override
-	public List<specialVo> selectList() throws Exception{
+	public List<SpecialVo> selectList() throws Exception{
 		
 		return specialDao.selectList();
 		
 	}
 	@Override
-	public specialVo speicalView(specialVo specialVo)throws Exception{
+	public SpecialVo speicalView(SpecialVo specialVo)throws Exception{
 		return specialDao.specialView(specialVo);
 	};
 	
 	@Override
-	public int speicalInsert(specialVo specialVo)throws Exception{
+	public int speicalInsert(SpecialVo specialVo)throws Exception{
 	
 		return specialDao.speicalInsert(specialVo);
 	}
 	@Override
-	   public int specialDelete(specialVo specialVo) throws Exception {
+	   public int specialDelete(SpecialVo specialVo) throws Exception {
 	      return specialDao.specialDelete(specialVo);
 	   }
 	

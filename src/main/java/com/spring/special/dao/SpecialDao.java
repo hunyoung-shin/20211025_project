@@ -2,18 +2,18 @@ package com.spring.special.dao;
 
 import java.util.List;
 
-import com.spring.special.vo.specialVo;
+import com.spring.special.vo.SpecialVo;
 
 public interface SpecialDao {
 	
 	public void test()throws Exception;
 	
-	public List<specialVo> selectList()throws Exception;
+	public List<SpecialVo> selectList()throws Exception;
 	
-	public specialVo specialView(specialVo specialVo)throws Exception;
+	public SpecialVo specialView(SpecialVo specialVo)throws Exception;
 	
-	public int speicalInsert(specialVo specialVo)throws Exception;
+	public int speicalInsert(SpecialVo specialVo)throws Exception;
 	
-	public int specialDelete(specialVo specialVo) throws Exception;
+	public int specialDelete(SpecialVo specialVo) throws Exception;
 
 }

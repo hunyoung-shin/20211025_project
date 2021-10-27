@@ -48,18 +48,25 @@
 		<!-- nav -->
 			<nav class="nav">
 				<ul>
-					<li>
-						<a href="/member/memberLogin.do" >로그인</a>
-					</li>
-					<li>
-						<a href="/member/memberSignUp.do" >회원가입</a>
-					</li>
-					<li>
-						마이페이지
-					</li>
-					<li>
-						장바구니
-					</li>
+					<c:if test="${sessionscope.memberId } != null">
+						<li>
+							${sessionscope.memberId } 님
+						</li>
+						<li>
+							마이페이지
+						</li>
+						<li>
+							장바구니
+						</li>
+					</c:if>
+					<c:otherwise>
+						<li>
+							<a href="/member/memberLogin.do" >로그인</a>
+						</li>
+						<li>
+							<a href="/member/memberSignUp.do" >회원가입</a>
+						</li>
+					</c:otherwise>
 				</ul>
 			</nav>
 			<br/>
@@ -83,10 +90,10 @@
 				<hr/>
 				<ul class="adminUl">
 					<li>
-						<a href="/special/specialWrite.do">기획전 작성</a>
+						<a href="/special/makeSpeicalPage.do">기획전 작성</a>
 					</li>
 					<li>
-						<a href="/goods/goodsWrite.do">기획전 상품추가</a>
+						<a href="javascript:void(0);" onclick="addGoods();return false;">기획전 상품추가</a>
 					</li>
 				</ul>
 				<ul class="memberUl">
@@ -95,13 +102,27 @@
 					</li>
 				</ul>
 			</aside>
+		<script type="text/javascript">
+			function addGoods(){
+				document.specialInfo.method = "get";
+				document.specialInfo.action = "/special/makeSpeicalGoods.do";
+			}
+		</script>
 		<!-- Main -->
 			<section>
 				<article class="content">
-					<a href="/special/list.do">기획전</a>
-					<span>
-						> [${sessionscope.brandInit }] ${sessionscope.title }
-					</span>
+					<form name="specialInfo" class="specialInfo">
+						<a href="/special/list.do">기획전</a>
+						<span>
+							> [${sessionscope.s_brandInit }] ${sessionscope.s_title }
+						</span>
+						<c:if test="${sessionscope.s_brandInit } != null">
+							<input type="hidden" id="s_brandInit" value="${sessionscope.s_brandInit }">
+						</c:if>
+						<c:if test="${sessionscope.s_title } != null">
+							<input type="hidden" id="s_title" value="${sessionscope.s_title }">
+						</c:if>
+					</form>
 				</article>
 				<article class="imgBan">
 					<div class="innerImgBan">
