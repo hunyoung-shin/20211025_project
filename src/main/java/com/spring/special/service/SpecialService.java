@@ -2,18 +2,18 @@ package com.spring.special.service;
 
 import java.util.List;
 
-import com.spring.special.vo.specialVo;
+import com.spring.special.vo.SpecialVo;
 
 public interface SpecialService {
 	
 	public void test()throws Exception;
 	
-	public List<specialVo> selectList()throws Exception;
+	public List<SpecialVo> selectList()throws Exception;
 	
-	public specialVo speicalView(specialVo specialVo)throws Exception;
+	public SpecialVo speicalView(SpecialVo specialVo)throws Exception;
 	
-	public int speicalInsert(specialVo specialVo)throws Exception;
+	public int speicalInsert(SpecialVo specialVo)throws Exception;
 	
-	public int specialDelete(specialVo specialVo) throws Exception;
+	public int specialDelete(SpecialVo specialVo) throws Exception;
 	   
 }

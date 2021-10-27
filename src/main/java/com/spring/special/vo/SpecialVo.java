@@ -1,6 +1,6 @@
 package com.spring.special.vo;
 
-public class specialVo {
+public class SpecialVo {
 
 	private int s_Num;
 	private String s_title;

@@ -7,12 +7,13 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.spring.special.service.SpecialService;
-import com.spring.special.vo.specialVo;
+import com.spring.special.vo.SpecialVo;
 
 @Controller
 public class specialController {
@@ -22,10 +23,10 @@ public class specialController {
 	
 	//LIST
 	@RequestMapping(value="/special/list.do", method = RequestMethod.GET)
-	public String specialList(HttpSession session, specialVo specialVo)throws Exception{
+	public String specialList(HttpSession session, SpecialVo specialVo)throws Exception{
 		
 		try {
-			List<specialVo> s_list = new ArrayList();
+			List<SpecialVo> s_list = new ArrayList();
 			System.out.println(s_list);
 			}
 			catch(Exception e) {
@@ -36,16 +37,16 @@ public class specialController {
 	}
 	
 	//VIEW
-	@RequestMapping(value="/special/{s_num}/view.do", method = RequestMethod.GET)
-	public String specialview(HttpSession session, specialVo specialVo
+	@RequestMapping(value="/special/view.do", method = RequestMethod.GET)
+	public String specialview(HttpSession session, SpecialVo specialVo
 			,@RequestParam("s_num")int s_num)throws Exception{
 		
 		try {
-			specialVo view = new specialVo();
+			SpecialVo view = new SpecialVo();
 			view.setS_Num(s_num);
 			view = specialService.speicalView(specialVo);
-			session.setAttribute("title", specialVo.getS_title());
-			session.setAttribute("brandInit", specialVo.getS_brandInit());
+			session.setAttribute("s_title", specialVo.getS_title());
+			session.setAttribute("s_brandInit", specialVo.getS_brandInit());
 			session.setMaxInactiveInterval(60*10);
 			session.getCreationTime();
 		}
@@ -53,31 +54,30 @@ public class specialController {
 			System.out.println("============================================");
 			System.out.println("에러는 : "+e.getMessage().toString());
 		}
-	
+		
 		return "/special/view";
 	}
 	
 	
-	//CREATE
-	@RequestMapping(value="/speical/makeSpeical.do")
-		public String makeSpecial(specialVo specialVo)throws Exception{
+	// 기획전내 상품 추가
+	@RequestMapping(value="/special/makeSpeicalGoods.do", method = RequestMethod.GET)
+		public String makeSpecialGoods(SpecialVo specialVo, Model model) throws Exception{
 		
-		int insertSpecial = 0;
-		insertSpecial = specialService.speicalInsert(specialVo);
+		model.addAttribute("s_title", specialVo.getS_title());
+		model.addAttribute("s_brandInit", specialVo.getS_brandInit());
 		
-		
-		return "/speical/signUp";
+		return "/special/makeGoods";
 	}
 
-	//CREATE
-	@RequestMapping(value="/speical/makeSpeicalPage.do",method = RequestMethod.GET)
-		public String makeSpecialPage(specialVo specialVo)throws Exception{
+	// 새 기획전 CREATE
+	@RequestMapping(value="/special/makeSpeicalPage.do",method = RequestMethod.GET)
+		public String makeSpecialPage() throws Exception{
 		
-		return "/speical/makeSpecial";
+		return "/special/makeSpecial";
 	}
 	//DELETE
 	@RequestMapping(value="/special/delSpecial.do")
-	public String delSpecial(specialVo specialVo)throws Exception{
+	public String delSpecial(SpecialVo specialVo)throws Exception{
 		
 		int delSpecial = 0;
 		delSpecial = specialService.specialDelete(specialVo);
@@ -93,7 +93,7 @@ public class specialController {
 	}
 	
 	//MODIFY
-	@RequestMapping(value="/spcial/modifySpecial.do")
+	@RequestMapping(value="/special/modifySpecial.do")
 	public String modifyGoods()throws Exception{
 		
 		return null;
