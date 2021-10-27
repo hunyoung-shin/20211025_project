@@ -15,10 +15,10 @@
     
     
     <resultMap type="com.spring.brand.vo.brandVo" id="brandVo">
-    	<result property="s_BrandInit" 	column="BRAND_INIT"/>
-    	<result property="" 	column="BRAND_ID"/>
-    	<result property="" 	column="BRAND_NAME"/>
-    	<result property="" 	column="BRAND_DETAIL"/>
+    	<result property="br_Init" 	column="BRAND_INIT"/>
+    	<result property="br_Id" 	column="BRAND_ID"/>
+    	<result property="br_Name" 	column="BRAND_NAME"/>
+    	<result property="br_Detail" 	column="BRAND_DETAIL"/>
     </resultMap>
     
     

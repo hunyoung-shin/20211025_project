@@ -54,7 +54,7 @@ public class specialController {
 			System.out.println("============================================");
 			System.out.println("에러는 : "+e.getMessage().toString());
 		}
-	
+		
 		return "/special/view";
 	}
 	
@@ -82,7 +82,7 @@ public class specialController {
 		int delSpecial = 0;
 		delSpecial = specialService.specialDelete(specialVo);
 				
-		return null;
+		return "/special/list.do";
 	}
 	
 	//UPDATE
