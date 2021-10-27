@@ -86,7 +86,7 @@
 						<a href="/special/specialWrite.do">기획전 작성</a>
 					</li>
 					<li>
-						<a href="/goods/goodsWrite.do">기획전 상품추가</a>
+						<a href="/special/makeGoods.do">기획전 상품추가</a>
 					</li>
 				</ul>
 				<ul class="memberUl">
