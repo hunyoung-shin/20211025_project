@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.spring.brand.vo.BrandVo;
 import com.spring.special.service.SpecialService;
 import com.spring.special.vo.SpecialVo;
 
@@ -24,16 +25,24 @@ public class specialController {
 	
 	//LIST
 	@RequestMapping(value="/special/list.do", method = RequestMethod.GET)
-	public String specialList(HttpSession session, SpecialVo specialVo)throws Exception{
+	public String specialList(HttpSession session, Model model)throws Exception{
 		
-		try {
-			List<SpecialVo> s_list = new ArrayList();
-			System.out.println(s_list);
-			}
-			catch(Exception e) {
-				System.out.println("============================================");
-				System.out.println("에러는 : "+e.getMessage().toString());;
-			}
+		// xml파일까지 작성 후 실행 해볼 것 -> 중간중간 '지뢰' 있음
+		
+		BrandVo brandVo = new BrandVo();
+		// brandVo 가져올 필요가 있음 -> theme도 brandVo에 넣어서 가져올 수 있도록(또는 새로 db table 생성)
+		List<String> themeList = new ArrayList<String>();
+		List<SpecialVo> specialList = new ArrayList<SpecialVo>();
+		
+		/*service에서 db까지 왔다갔다 할 3개
+		 brandVo
+		 themeList
+		 specialList
+		 */
+		
+		// model에 적용 (theme이랑 special도)
+		model.addAttribute("brandVo", brandVo);
+		
 		return "/special/list";
 	}
 	
