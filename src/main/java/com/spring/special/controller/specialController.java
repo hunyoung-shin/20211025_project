@@ -20,18 +20,6 @@ public class specialController {
 	@Autowired
 	SpecialService specialService;
 	
-	
-	
-	
-	@RequestMapping(value="/special/goodsTest.do", method = RequestMethod.GET)
-	public String test()throws Exception{
-		System.out.println("나 실행됬음aaaaaaaaa!");
-		
-		return "/goods/goodsTest";
-	}
-	
-	
-	
 	//LIST
 	@RequestMapping(value="/special/list.do", method = RequestMethod.GET)
 	public String specialList(HttpSession session, specialVo specialVo)throws Exception{
@@ -42,62 +30,68 @@ public class specialController {
 			}
 			catch(Exception e) {
 				System.out.println("============================================");
-				System.out.println(e.getMessage().toString());
+				System.out.println("에러는 : "+e.getMessage().toString());;
 			}
 		return null;
 	}
 	
-	
 	//VIEW
 	@RequestMapping(value="/special/{s_num}/view.do", method = RequestMethod.GET)
 	public String specialview(HttpSession session, specialVo specialVo
-			,@RequestParam("s_num")int s_num
-			
-			)throws Exception{
+			,@RequestParam("s_num")int s_num)throws Exception{
 		
 		try {
-		specialVo view = new specialVo();
-		view.setS_Num(s_num);
-		view = specialService.speicalView(specialVo);
-		session.setAttribute("title", specialVo.getS_title());
-		session.setAttribute("brandInit", specialVo.getS_brandInit());
+			specialVo view = new specialVo();
+			view.setS_Num(s_num);
+			view = specialService.speicalView(specialVo);
+			session.setAttribute("title", specialVo.getS_title());
+			session.setAttribute("brandInit", specialVo.getS_brandInit());
+			session.setMaxInactiveInterval(60*10);
+			session.getCreationTime();
 		}
 		catch(Exception e) {
 			System.out.println("============================================");
-			System.out.println(e.getMessage().toString());
+			System.out.println("에러는 : "+e.getMessage().toString());
 		}
-		
-		//s_list = specialService.selectList();
-		//System.out.println(s_list);
+	
 		return "/special/view";
 	}
 	
 	
-	
 	//CREATE
-	@RequestMapping(value="/special/makeGoods.do")
-	public String makeGoods()throws Exception{
+	@RequestMapping(value="/speical/makeSpeical.do")
+		public String makeSpecial(specialVo specialVo)throws Exception{
 		
-		return null;
+		int insertSpecial = 0;
+		insertSpecial = specialService.speicalInsert(specialVo);
+		
+		
+		return "/speical/signUp";
 	}
-	
+
+	//CREATE
+	@RequestMapping(value="/speical/makeSpeicalPage.do",method = RequestMethod.GET)
+		public String makeSpecialPage(specialVo specialVo)throws Exception{
+		
+		return "/speical/makeSpecial";
+	}
 	//DELETE
-	@RequestMapping(value="/special/delGoods.do")
-	public String delGoods()throws Exception{
+	@RequestMapping(value="/special/delSpecial.do")
+	public String delSpecial()throws Exception{
 		
 		
 		return null;
 	}
 	
 	//UPDATE
-	@RequestMapping(value="/special/updateGoods.do")
+	@RequestMapping(value="/special/updateSpecial.do")
 	public String updateGoods()throws Exception{
 		
 		return null;
 	}
 	
 	//MODIFY
-	@RequestMapping(value="/spcial/modifyGoods.do")
+	@RequestMapping(value="/spcial/modifySpecial.do")
 	public String modifyGoods()throws Exception{
 		
 		return null;

@@ -28,8 +28,13 @@ public class SpecialDaoImpl implements SpecialDao{
 	@Override
 	public specialVo specialView(specialVo specialVo)throws Exception{
 		
-		
 		return session.selectOne("special", "specialView");
+	}
+	
+	@Override
+	public int speicalInsert(specialVo specialVo)throws Exception{
+		
+		return session.insert("special.specialInsert", specialVo);
 	}
 	
 }

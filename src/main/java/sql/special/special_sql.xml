@@ -19,22 +19,31 @@
     
     <select id="specialList" parameterType="com.spring.special.vo.specialVo" resultMap="specialVo">
     SELECT
-    (
-    SPECIAL_NUM
-    ,SPECIAL_TITLE
-    ,SPECIAL_IMAGE
-    ,SPECIAL_THEME
-    ,SPECIAL_NOTICE
-    ,LINK_IMG
-    ,BRAND_ID
-    )
-    
+	    SPECIAL_NUM
+	    ,SPECIAL_TITLE
+	    ,SPECIAL_IMAGE
+	    ,SPECIAL_THEME
+	    ,SPECIAL_NOTICE
+	    ,LINK_IMG
+	    ,BRAND_ID
     FROM
-    SPECIAL
+    	SPECIAL
     </select>
     
     <select id="specialView" parameterType="com.spring.special.vo.specialVo" resultMap="specialVo">
+    SELECT
+	    SPECIAL_NUM
+	    ,SPECIAL_TITLE
+	    ,SPECIAL_IMAGE
+	    ,SPECIAL_THEME
+	    ,SPECIAL_NOTICE
+	    ,LINK_IMG
+	    ,SPECIAL.BRAND_ID
+	    ,BRAND_INIT
+    FROM
+    	SPECIAL,BRAND
     
-    
+    WHERE
+    	SPECIAL.BRAND_ID=BRAND.BRAND_ID
     </select>
 </mapper>

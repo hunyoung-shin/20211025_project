@@ -12,4 +12,9 @@ public interface SpecialService {
 	
 	public specialVo speicalView(specialVo specialVo)throws Exception;
 	
+	public int speicalInsert(specialVo specialVo)throws Exception;
+	
+	public specialVo speicalDelete(specialVo specialVo)throws Exception;
+
+	public specialVo speicalUpdate(specialVo specialVo)throws Exception;
 }

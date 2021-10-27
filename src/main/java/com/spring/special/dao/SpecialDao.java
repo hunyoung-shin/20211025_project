@@ -12,5 +12,6 @@ public interface SpecialDao {
 	
 	public specialVo specialView(specialVo specialVo)throws Exception;
 	
-	
+	public int speicalInsert(specialVo specialVo)throws Exception;
+
 }
