@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="goods">
+	<resultMap type="com.spring.goods.vo.goodsVo" id="goodsVo">
+    	 <result property="g_Num" column="GOODS_NUM"/>
+		 <result property="br_Id" column="BRAND_ID"/>
+		 <result property="g_Name" column="GOODS_NAME"/>
+		 <result property="g_Price" column="GOODS_PRICE"/>
+		 <result property=" g_Img" column="GOODS_IMAGE"/>
+		 <result property=" g_Class" column="GOODS_CLASSIFY"/>
+		 <result property=" g_Like" column="GOODS_LIKE"/>
+		 <result property="g_Review" column="GOODS_REVIEW"/>
+		 <result property=" g_color" column="GOODS_COLOR"/>
+		 <result property=" g_Sale" column="GOODS_SALEPCT"/>
+		 <result property=" g_Info" column="GOODS_INFO"/>
+		 <result property=" g_Inimg" column="GOODS_INFOIMAGE"/>
+    </resultMap>
+	
+	<!-- 상품리스트 -->
+	<select id="goodsList" parameterType="com.spring.goods.vo.goodsVo" resultMap="goodsVo">
+		SELECT
+			GOODS_NUM
+			,BRAND_ID
+			,GOODS_NAME
+			,GOODS_PRICE
+			,GOODS_IMAGE
+			,GOODS_CLASSIFY
+			,GOODS_LIKE
+			,GOODS_REVIEW
+			,GOODS_COLOR
+			,GOODS_SALEPCT
+			,GOODS_INFO
+			,GOODS_INFOIMAGE
+		FROM
+			GOODS
+			
+	</select>
+	
+	
+	<select id="goodsAdd" parameterType="com.spring.goods.vo.goodsVo" >
+    	INSERT INTO
+    	GOODS(
+	    	GOODS_NUM
+			,BRAND_ID
+			,GOODS_NAME
+			,GOODS_PRICE
+			,GOODS_IMAGE
+			,GOODS_CLASSIFY
+			,GOODS_LIKE
+			,GOODS_REVIEW
+			,GOODS_COLOR
+			,GOODS_SALEPCT
+			,GOODS_INFO
+			,GOODS_INFOIMAGE
+		    )
+		VALUES
+			(
+			#{g_Num}
+			,#{br_Id}
+			,#{g_Name}
+			,#{g_Price}
+			,#{g_Img}
+			,#{g_Class}
+			,#{g_Like}
+			,#{g_Review}
+			,#{g_color}
+			,#{g_Sale}
+			,#{g_Info}
+			,#{g_Inimg}
+			)
+    </select>
+    
+    <select id="goodsDel" parameterType="com.spring.goods.vo.goodsVo" >
+    DELETE 
+    	FROM GOODS
+	WHERE 
+		GOODS_NUM = #{g_Num}
+    </select>
+</mapper>

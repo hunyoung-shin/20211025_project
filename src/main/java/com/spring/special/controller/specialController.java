@@ -77,9 +77,11 @@ public class specialController {
 	}
 	//DELETE
 	@RequestMapping(value="/special/delSpecial.do")
-	public String delSpecial()throws Exception{
+	public String delSpecial(specialVo specialVo)throws Exception{
 		
-		
+		int delSpecial = 0;
+		delSpecial = specialService.specialDelete(specialVo);
+				
 		return null;
 	}
 	

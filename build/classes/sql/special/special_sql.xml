@@ -9,41 +9,96 @@
     	<result property="s_notice" 	column="SPECIAL_NOTICE"/>
     	<result property="s_linkImg" 	column="LINK_IMG"/>
     	<result property="s_brandId" 	column="BRAND_ID"/>
-    	<result property="s_brandInit" 	column="USER_ID"/>
+    	<result property="s_brandInit" 	column="BRAND_INIT"/>
     	
     </resultMap>
     
-  <!--   <resultMap type="com.spring.brand.vo" id="brandVo">
+    
+    <resultMap type="com.spring.brand.vo.brandVo" id="brandVo">
     	<result property="s_BrandInit" 	column="BRAND_INIT"/>
-    </resultMap> -->
+    	<result property="" 	column="BRAND_ID"/>
+    	<result property="" 	column="BRAND_NAME"/>
+    	<result property="" 	column="BRAND_DETAIL"/>
+    </resultMap>
     
+    
+    <!-- 기획전페이지  -->
     <select id="specialList" parameterType="com.spring.special.vo.specialVo" resultMap="specialVo">
-    SELECT
-	    SPECIAL_NUM
-	    ,SPECIAL_TITLE
-	    ,SPECIAL_IMAGE
-	    ,SPECIAL_THEME
-	    ,SPECIAL_NOTICE
-	    ,LINK_IMG
-	    ,BRAND_ID
-    FROM
-    	SPECIAL
+	    SELECT
+		    SPECIAL_NUM
+		    ,SPECIAL_TITLE
+		    ,SPECIAL_IMAGE
+		    ,SPECIAL_THEME
+		    ,SPECIAL_NOTICE
+		    ,LINK_IMG
+		    ,SPECIAL.BRAND_ID
+		    ,BRAND_INIT
+	    
+	    FROM
+		    SPECIAL,BRAND
+		    
+	    WHERE
+		    SPECIAL.BRAND_ID=BRAND.BRAND_ID
+	    
     </select>
     
+    <!--디테일 페이지  -->
     <select id="specialView" parameterType="com.spring.special.vo.specialVo" resultMap="specialVo">
-    SELECT
-	    SPECIAL_NUM
-	    ,SPECIAL_TITLE
-	    ,SPECIAL_IMAGE
-	    ,SPECIAL_THEME
-	    ,SPECIAL_NOTICE
-	    ,LINK_IMG
-	    ,SPECIAL.BRAND_ID
-	    ,BRAND_INIT
-    FROM
-    	SPECIAL,BRAND
-    
-    WHERE
-    	SPECIAL.BRAND_ID=BRAND.BRAND_ID
+		SELECT
+			BAN_IMG
+			,GOODS_CLASSIFY
+			,GOODS_IMAGE  
+			,BRAND_NAME 
+			,GOODS_NAME  
+			,GOODS_PRICE
+			,GOODS_SALEPCT
+			,GOODS_LIKE
+			,GOODS_REVIEW
+			,GOODS_COLOR
+		
+		FROM
+			GOODS,BRAND,BANNER
+			
+		WHERE
+			GOODS.GOODS_NUM=BANNER.GOODS_NUM
+		AND
+			GOODS.BRAND_ID=BRAND.BRAND_ID
+			    	
     </select>
+    
+    <!-- 기획전추가 -->
+    <select id="specialAdd" parameterType="com.spring.special.vo.specialVo" >
+    	INSERT INTO
+    	SPECIAL(
+	    	SPECIAL_NUM
+		    ,SPECIAL_TITLE
+		    ,SPECIAL_IMAGE
+		    ,SPECIAL_THEME
+		    ,SPECIAL_NOTICE
+		    ,LINK_IMG
+		    ,SPECIAL.BRAND_ID
+		    ,BRAND_INIT
+		    )
+		VALUES
+			(
+			#{s_Num}
+			,#{s_title}
+			,#{s_image}
+			,#{s_theme}
+			,#{s_notice}
+			,#{s_linkImg}
+			,#{s_brandId}
+			,#{s_brandInit}
+			)
+    </select>
+    
+    <!-- 기획전삭제 -->
+    <select id="specialDelete" parameterType="com.spring.special.vo.specialVo" >
+    DELETE 
+    	FROM SPECIAL
+	WHERE 
+		SPECIAL_NUM = #{s_Num}
+    </select>
+    
+    
 </mapper>

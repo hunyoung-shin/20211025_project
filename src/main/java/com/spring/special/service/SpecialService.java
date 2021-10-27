@@ -14,7 +14,6 @@ public interface SpecialService {
 	
 	public int speicalInsert(specialVo specialVo)throws Exception;
 	
-	public specialVo speicalDelete(specialVo specialVo)throws Exception;
-
-	public specialVo speicalUpdate(specialVo specialVo)throws Exception;
+	public int specialDelete(specialVo specialVo) throws Exception;
+	   
 }

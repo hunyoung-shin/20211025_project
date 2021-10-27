@@ -37,4 +37,11 @@ public class SpecialDaoImpl implements SpecialDao{
 		return session.insert("special.specialInsert", specialVo);
 	}
 	
+	@Override
+	public int specialDelete(specialVo specialVo) throws Exception{
+		
+		
+		return session.delete("special.specialDelete", specialVo);
+	}
+	
 }
