@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.spring.brand.vo.BrandVo;
 import com.spring.common.CommonUtil;
@@ -112,17 +113,20 @@ public class specialController {
 
 		return "/special/makeSpecialPage";
 	}
+
 	@RequestMapping(value="/special/makeSpecialPageAction.do",method = RequestMethod.POST)
-	@ResponseBody
 	public String makeSpecialPageAction(SpecialVo specialVo) throws Exception{
 
-		HashMap<String, String> result = new HashMap<String, String>();
-		CommonUtil commonUtil = new CommonUtil();
-		int resultCnt = specialService.specialInsert(specialVo);
-		result.put("success", (resultCnt > 0)?"Y":"N");
-		String callbackMsg = commonUtil.getJsonCallBackString(" ",result);
+		// 파일 처리 먼저 해야함
+		// 파일명
+		String imgName = specialVo.getS_image().getOriginalFilename();
+		String linkImgName = specialVo.getS_linkImg().getOriginalFilename();
 		
-		return callbackMsg;
+		
+		int resultCnt = specialService.specialInsert(specialVo);
+		
+		
+		return "redirect:/special/list";
 	}
 
 	//DELETE

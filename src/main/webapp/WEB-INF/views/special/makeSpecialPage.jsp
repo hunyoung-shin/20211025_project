@@ -22,32 +22,16 @@
 		
 		$j("#submit").on("click",function(){
 			
-			var arr = new Array();
-			var $frm = $j('.makeSpecialPage :input');
-			list = $frm;
-			$j.ajax({
-			    url : "/special/makeSpecialPageAction.do",
-			    dataType: "json",
-			    type: "POST",
-			    data : list,
-			    success: function(data, textStatus, jqXHR)
-			    {
-					alert("작성완료");
-					
-					alert("메세지:"+data.success);
-					
-					location.href = "/special/list.do";
-			    },
-			    error: function (jqXHR, textStatus, errorThrown)
-			    {
-			    	alert("실패");
-			    }
-			});
+			// 조건은 일단 생략
+			// 예) 입력을 다 안했거나, 이미지 파일이 아닌 다른 파일을 업로드 했을 경우
+			
+			
+			document.makeSpecialPage.submit();
 		});
 	});
 </script>
 <body>
-<form class="makeSpecialPage">
+<form class="makeSpecialPage" method="post" enctype="multipart/form-data">
 	<table border ="1" id ='myTable' align='center'>
 		<tr>
 			<td width="120" align="center">
