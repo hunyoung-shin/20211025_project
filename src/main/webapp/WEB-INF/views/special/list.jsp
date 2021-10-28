@@ -96,7 +96,7 @@
 				<hr/>
 				<ul class="adminUl"> 
 					<li>
-						<a href="/special/makeSpeicalPage.do">기획전 작성</a>
+						<a href="/special/makeSpecialPage.do">기획전 작성</a>
 					</li>
 				</ul>
 				<ul class="memberUl">
