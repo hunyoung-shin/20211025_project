@@ -1,6 +1,7 @@
 package com.spring.special.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.spring.brand.vo.BrandVo;
+import com.spring.common.CommonUtil;
 import com.spring.special.service.SpecialService;
 import com.spring.special.vo.SpecialVo;
 
@@ -59,9 +61,10 @@ public class specialController {
 		try {
 			SpecialVo view = new SpecialVo();
 			view.setS_Num(s_num);
-			view = specialService.speicalView(specialVo);
+			view = specialService.specialView(specialVo);
+			
 			session.setAttribute("s_title", specialVo.getS_title());
-			session.setAttribute("s_brandInit", specialVo.getS_brandInit());
+//			session.setAttribute("s_brandInit", specialVo.getS_brandInit());
 			session.setMaxInactiveInterval(60*10);
 			session.getCreationTime();
 		}
@@ -109,11 +112,17 @@ public class specialController {
 
 		return "/special/makeSpecialPage";
 	}
-	@RequestMapping(value="/special/makeSpecialPageAction.do",method = RequestMethod.GET)
+	@RequestMapping(value="/special/makeSpecialPageAction.do",method = RequestMethod.POST)
 	@ResponseBody
-	public String makeSpecialPageAction() throws Exception{
+	public String makeSpecialPageAction(SpecialVo specialVo) throws Exception{
 
-		return "안만듬 아직";
+		HashMap<String, String> result = new HashMap<String, String>();
+		CommonUtil commonUtil = new CommonUtil();
+		int resultCnt = specialService.specialInsert(specialVo);
+		result.put("success", (resultCnt > 0)?"Y":"N");
+		String callbackMsg = commonUtil.getJsonCallBackString(" ",result);
+		
+		return callbackMsg;
 	}
 
 	//DELETE

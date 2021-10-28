@@ -9,7 +9,6 @@ public class SpecialVo {
 	private String s_notice;
 	private String s_linkImg;
 	private String s_brandId;
-	private String s_brandInit;
 	public int getS_Num() {
 		return s_Num;
 	}
@@ -52,12 +51,5 @@ public class SpecialVo {
 	public void setS_brandId(String s_brandId) {
 		this.s_brandId = s_brandId;
 	}
-	public String getS_brandInit() {
-		return s_brandInit;
-	}
-	public void setS_brandInit(String s_brandInit) {
-		this.s_brandInit = s_brandInit;
-	}
-	
-	
+
 }

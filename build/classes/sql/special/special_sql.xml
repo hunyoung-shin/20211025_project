@@ -9,9 +9,7 @@
     	<result property="s_notice" 	column="SPECIAL_NOTICE"/>
     	<result property="s_linkImg" 	column="LINK_IMG"/>
     	<result property="s_brandId" 	column="BRAND_ID"/>
-    	<result property="s_brandInit" 	column="BRAND_INIT"/>
     </resultMap>
-    
     
     <resultMap type="com.spring.brand.vo.BrandVo" id="brandVo">
     	<result property="br_Init" 	column="BRAND_INIT"/>
@@ -31,7 +29,6 @@
 		    ,SPECIAL_NOTICE
 		    ,LINK_IMG
 		    ,SPECIAL.BRAND_ID
-		    ,BRAND_INIT
 	    
 	    FROM
 		    SPECIAL,BRAND
@@ -74,20 +71,21 @@
 		    ,SPECIAL_IMAGE
 		    ,SPECIAL_THEME
 		    ,SPECIAL_NOTICE
-		    ,LINK_IMG
-		    ,SPECIAL.BRAND_ID
-		    ,BRAND_INIT
+		    ,LINK_IMG 
+		    ,BRAND_ID
 		    )
 		VALUES
 			(
-			#{s_Num}
+			(SELECT
+					TO_NUMBER(NVL(MAX(SPECIAL_NUM)+1,1))
+	    		FROM
+	    			SPECIAL)
 			,#{s_title}
 			,#{s_image}
 			,#{s_theme}
 			,#{s_notice}
 			,#{s_linkImg}
 			,#{s_brandId}
-			,#{s_brandInit}
 			)
     </select>
     

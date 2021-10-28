@@ -11,9 +11,9 @@ public interface SpecialService {
 
 	public List<SpecialVo> selectList()throws Exception;
 
-	public SpecialVo speicalView(SpecialVo specialVo)throws Exception;
+	public SpecialVo specialView(SpecialVo specialVo)throws Exception;
 
-	public int speicalInsert(SpecialVo specialVo)throws Exception;
+	public int specialInsert(SpecialVo specialVo)throws Exception;
 
 	public int specialDelete(SpecialVo specialVo) throws Exception;
 

@@ -25,9 +25,8 @@
 			var arr = new Array();
 			var $frm = $j('.makeSpecialPage :input');
 			list = $frm;
-			alert(list);
 			$j.ajax({
-			    url : "/special/makeSpecialGoodsAction.do",
+			    url : "/special/makeSpecialPageAction.do",
 			    dataType: "json",
 			    type: "POST",
 			    data : list,
@@ -55,7 +54,7 @@
 				기획전 명
 			</td>
 			<td width="400">
-				<input type="text" id="s_title">
+				<input type="text" id="s_title" name="s_title">
 			</td>
 		</tr>
 		<tr>
@@ -89,7 +88,7 @@
 				유의 사항
 			</td>
 			<td>
-				<textarea rows="5" cols="40" id="s_notice"></textarea>
+				<textarea rows="5" cols="40" id="s_notice" name="s_notice"></textarea>
 			</td>
 		</tr>
 		<tr>
@@ -97,7 +96,7 @@
 				대표이미지
 			</td>
 			<td>
-				<input type="file" id="s_theme">
+				<input type="file" id="s_image" name="s_image">
 			</td> 
 		</tr>
 		<tr>
