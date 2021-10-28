@@ -74,14 +74,15 @@ public class specialController {
 	}
 
 	// 기획전내 상품 추가
-	@RequestMapping(value="/special/{s_num}/makeSpecialGoods.do", method = RequestMethod.GET)
-	public String makeSpecialGoods(SpecialVo specialVo, @RequestParam("s_num")int s_num, Model model) throws Exception{
-
-		SpecialVo view = new SpecialVo();
-		view.setS_Num(s_num);
-		view = specialService.speicalView(specialVo);
-
-		model.addAttribute("view", view);
+	@RequestMapping(value="/special/makeSpecialGoods.do", method = RequestMethod.GET)
+	public String makeSpecialGoods(SpecialVo specialVo, Model model) throws Exception{
+		
+//		
+//		SpecialVo view = new SpecialVo();
+//		view.setS_Num(s_num);
+//		view = specialService.speicalView(specialVo);
+//
+//		model.addAttribute("view", view);
 
 		return "special/makeSpecialGoods";
 	}

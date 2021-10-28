@@ -10,9 +10,17 @@
 </head>
 <script>
 	$j(document).ready(function(){
+		
+		$j("#selectBrand").change(function(){
+			var value = $j("#selectBrand").val()
+			$j("#s_brandId").val(value);
+		});
+		$j("#selectTheme").change(function(){
+			var value = $j("#selectTheme").val()
+			$j("#s_theme").val(value);
+		});
+		
 		$j("#submit").on("click",function(){
-			
-			$j.("#s_brandId")
 			
 			var arr = new Array();
 			var $frm = $j('.makeSpecialPage :input');
@@ -23,7 +31,6 @@
 			    dataType: "json",
 			    type: "POST",
 			    data : list,
-			    
 			    success: function(data, textStatus, jqXHR)
 			    {
 					alert("작성완료");
@@ -35,17 +42,10 @@
 			    error: function (jqXHR, textStatus, errorThrown)
 			    {
 			    	alert("실패");
-			    	
-			    	
 			    }
 			});
 		});
 	});
-	
-	function inputBrandId(){
-		var bName = $j("#g_Class").val();
-		$j("#s_brandId").val($j("#br_Id").val());
-	}
 </script>
 <body>
 <form class="makeSpecialPage">
@@ -63,14 +63,34 @@
 				브랜드
 			</td>
 			<td>
-				<select id="brand" onblur="inputBrandId();">
+				<select id="selectBrand">
 					<c:forEach items="${brandVoList}" var="brandVoList">
-						${brandVoList.br_Name}
-						<input type="hidden" id="br_Id" value="${brandVoList.br_Id }">
+						<option value="${brandVoList.br_Id }">${brandVoList.br_Name}</option>
 					</c:forEach>
 				</select>
-				<input type="hidden" id="s_brandId" name="s_brandId">
+				<input type="hidden" id="s_brandId" name="s_brandId" value="1">
 			</td> 
+		</tr>
+		<tr>
+			<td>
+				테마
+			</td>
+			<td>
+				<select id="selectTheme" >
+					<c:forEach items="${themeList }" var="themeList">
+						<option value="${themeList.br_Id }">${themeList.br_Name }</option>
+					</c:forEach>
+				</select>
+				<input type="hidden" id="s_theme" name="s_theme" value="a01">
+			</td>
+		</tr>
+		<tr>
+			<td>
+				유의 사항
+			</td>
+			<td>
+				<textarea rows="5" cols="40" id="s_notice"></textarea>
+			</td>
 		</tr>
 		<tr>
 			<td>
@@ -82,26 +102,6 @@
 		</tr>
 		<tr>
 			<td>
-				테마
-			</td>
-			<td>
-				<select id="s_theme" >
-					<c:forEach items="${themeList }" var="themeList">
-						${themeList.br_Name }
-					</c:forEach>
-				</select>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				유의 사항
-			</td>
-			<td>
-				<input type="text" id="s_notice">
-			</td>
-		</tr>
-		<tr>
-			<td>
 				기획전 링크용 이미지
 			</td>
 			<td>
@@ -109,7 +109,7 @@
 			</td>
 		</tr>
 		<tr>
-			<td align="right">
+			<td align="right" colspan="2">
 				<input id="submit" type="button" value="기획전 작성">
 				<input type="button" value="리스트" onclick="location.href='/special/list.do'">
 			</td>

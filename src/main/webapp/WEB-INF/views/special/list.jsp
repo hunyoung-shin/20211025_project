@@ -26,18 +26,6 @@
 		</style>
 	</head>
 	<body class="is-preload">
-		<!-- Scripts -->
-		<script>
-			var str = "[";
-			str += ${sessionscope.brandInit};
-			str += "] ";
-			if(${sessionscope.brandInit}.length <= 10){
-				str += ${sessionscope.title};
-			}
-			str += " | shopshop";
-			document.title = str;
-		</script>
-		
 		<div id="wrapper">
 		<!-- Header -->
 			<header class="header">
