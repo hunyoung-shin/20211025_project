@@ -45,7 +45,7 @@ public class SpecialDaoImpl implements SpecialDao{
 	}
 	
 	@Override
-	public List<String> s_themeList()throws Exception{
+	public List<BrandVo> s_themeList()throws Exception{
 		
 		return session.selectList("special", "s_themeList");
 	}

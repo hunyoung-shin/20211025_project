@@ -101,15 +101,29 @@
     </select>
     <!--기획전 테마 불러오기-->
     <select id="s_themeList">
-    	
+    S
     </select>
     <!--기획전 리스트 불러오기-->
-    <select id="s_specialList">
-    
+    <select id="s_specialList" resultMap="brandVo">
+    	SELECT 
+    		BRAND_NAME
+    	FROM
+    		BRAND
+    	WHERE
+    		DATA_TYPE = 'theme'
     </select>
-    <!--기획전 참여 리스트 불러오기-->
-    <select id="s_brandList">
-    
+    <!--브랜드 리스트 불러오기-->
+    <select id="s_brandList" resultMap="brandVo">
+    	SELECT 
+    		BRAND_INIT
+    		,BRAND_ID
+    		,BRAND_NAME
+    		,BRAND_DETAIL
+    		,DATA_TYPE
+    	FROM
+    		BRAND
+    	WHERE
+    		DATA_TYPE = 'brand'
     </select>
     
 </mapper>

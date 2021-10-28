@@ -11,6 +11,9 @@
 <script>
 	$j(document).ready(function(){
 		$j("#submit").on("click",function(){
+			
+			$j.("#s_brandId")
+			
 			var arr = new Array();
 			var $frm = $j('.makeSpecialPage :input');
 			list = $frm;
@@ -38,6 +41,11 @@
 			});
 		});
 	});
+	
+	function inputBrandId(){
+		var bName = $j("#g_Class").val();
+		$j("#s_brandId").val($j("#br_Id").val());
+	}
 </script>
 <body>
 <form class="makeSpecialPage">
@@ -55,11 +63,13 @@
 				브랜드
 			</td>
 			<td>
-<!-- 				<select id="g_Class" > -->
-<%-- 					<c:forEach items="" var=""> --%>
-					
-<%-- 					</c:forEach> --%>
-<!-- 				</select> -->
+				<select id="brand" onblur="inputBrandId();">
+					<c:forEach items="${brandVoList}" var="brandVoList">
+						${brandVoList.br_Name}
+						<input type="hidden" id="br_Id" value="${brandVoList.br_Id }">
+					</c:forEach>
+				</select>
+				<input type="hidden" id="s_brandId" name="s_brandId">
 			</td> 
 		</tr>
 		<tr>
@@ -75,11 +85,11 @@
 				테마
 			</td>
 			<td>
-<!-- 				<select id="g_Class" > -->
-<%-- 					<c:forEach items="" var=""> --%>
-					
-<%-- 					</c:forEach> --%>
-<!-- 				</select> -->
+				<select id="s_theme" >
+					<c:forEach items="${themeList }" var="themeList">
+						${themeList.br_Name }
+					</c:forEach>
+				</select>
 			</td>
 		</tr>
 		<tr>

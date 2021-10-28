@@ -42,7 +42,7 @@ public class SpecialServiceImpl implements SpecialService{
 	   }
 	
 	@Override
-	public List<String> s_themeList()throws Exception{
+	public List<BrandVo> s_themeList()throws Exception{
 		return specialDao.s_themeList();
 	}
 	

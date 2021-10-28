@@ -92,7 +92,7 @@
 				<hr/>
 				<ul class="adminUl">
 					<li>
-						<a href="/special/makeSpeicalPage.do">기획전 작성</a>
+						<a href="/special/makeSpecialPage.do">기획전 작성</a>
 					</li>
 					<li>
 						<a href="javascript:void(0);" onclick="addGoods();return false;">기획전 상품추가</a>
@@ -107,7 +107,7 @@
 		<script type="text/javascript">
 			function addGoods(){
 				document.specialInfo.method = "get";
-				document.specialInfo.action = "/special/makeSpeicalGoods.do";
+				document.specialInfo.action = "/special/makeSpecialGoods.do";
 			}
 		</script>
 		<!-- Main -->

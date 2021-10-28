@@ -48,11 +48,10 @@
 		<!-- nav -->
 			<nav class="nav">
 				<ul>
-				
 					<c:choose>
-						<c:when test="${not empty sessionscope.memberId}">
+						<c:when test="${not empty sessionscope.userId}">
 							<li>
-								${userName.userName } 님
+								${sessionscope.userName } 님
 							</li>
 							<li>
 								마이페이지
@@ -80,9 +79,6 @@
 					<li>
 						<a href="">WOMEN</a>
 					</li>
-						<li>
-						${sessionscope.userName }
-					</li>
 					<li>
 						<a href="">MAN</a>
 					</li>
@@ -96,7 +92,7 @@
 				<hr/>
 				<ul class="adminUl">
 					<li>
-						<a href="/special/makeSpeicalPage.do">기획전 작성</a>
+						<a href="/special/makeSpecialPage.do">기획전 작성</a>
 					</li>
 				</ul>
 				<ul class="memberUl">

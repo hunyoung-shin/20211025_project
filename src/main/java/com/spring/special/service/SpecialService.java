@@ -17,7 +17,7 @@ public interface SpecialService {
 	
 	public int specialDelete(SpecialVo specialVo) throws Exception;
 
-	public List<String> s_themeList()throws Exception;
+	public List<BrandVo> s_themeList()throws Exception;
 	
 	public List<SpecialVo> s_specialList()throws Exception;
 
