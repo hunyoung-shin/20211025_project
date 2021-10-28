@@ -48,10 +48,11 @@
 		<!-- nav -->
 			<nav class="nav">
 				<ul>
+				
 					<c:choose>
 						<c:when test="${not empty sessionscope.memberId}">
 							<li>
-								${sessionscope.memberId } 님
+								${userName.userName } 님
 							</li>
 							<li>
 								마이페이지
@@ -78,6 +79,9 @@
 				<ul class="big">
 					<li>
 						<a href="">WOMEN</a>
+					</li>
+						<li>
+						${sessionscope.userName }
 					</li>
 					<li>
 						<a href="">MAN</a>

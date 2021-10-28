@@ -16,6 +16,7 @@ public class GoodsController {
 	public void test()throws Exception{
 		System.out.println("혼자야?");
 		 
+		 
 		
 		
 	}

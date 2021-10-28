@@ -35,10 +35,12 @@ public class specialController {
 		List<SpecialVo> specialList = new ArrayList<SpecialVo>();
 		List<BrandVo> brandList = new ArrayList<BrandVo>();
 
+		
 		/*
-		 * themeList = specialService.s_themeList(); specialList =
-		 * specialService.s_specialList(); brandList = specialService.s_brandList();
+		 * themeList = specialService.s_themeList(); specialList
+		 * =specialService.s_specialList(); brandList = specialService.s_brandList();
 		 */
+		 
 		 
 		/*service에서 db까지 왔다갔다 할 3개
 		 brandVo
@@ -76,14 +78,18 @@ public class specialController {
 	
 	
 	// 기획전내 상품 추가
-	@RequestMapping(value="/special/makeSpecialGoods.do", method = RequestMethod.GET)
-	public String makeSpecialGoods(SpecialVo specialVo, Model model) throws Exception{
-		
-		model.addAttribute("s_title", specialVo.getS_title());
-		model.addAttribute("s_brandInit", specialVo.getS_brandInit());
-		
-	return "/special/makeGoods";
-	}
+	   @RequestMapping(value="/special/{s_num}/makeSpecialGoods.do", method = RequestMethod.GET)
+	   public String makeSpecialGoods(SpecialVo specialVo, @RequestParam("s_num")int s_num, Model model) throws Exception{
+	      
+	      SpecialVo view = new SpecialVo();
+	      view.setS_Num(s_num);
+	      view = specialService.speicalView(specialVo);
+	      
+	      model.addAttribute("view", view);
+	      
+	      return "special/makeSpecialGoods";
+	   }
+	   
 	@RequestMapping(value="/special/makeSpecialGoodsAction.do",method = RequestMethod.GET)
 	@ResponseBody
 	public String makeSpecialGoodsAction() throws Exception{
@@ -92,11 +98,11 @@ public class specialController {
 	}
 
 	// 새 기획전 CREATE PAGE
-	@RequestMapping(value="/special/makeSpecialPage.do",method = RequestMethod.GET)
-	public String makeSpecialPage() throws Exception{
-		
-		return "/special/makeSpecial";
-	}
+	   @RequestMapping(value="/special/makeSpecialPage.do",method = RequestMethod.GET)
+	   public String makeSpecialPage() throws Exception{
+	      
+	      return "/special/makeSpecialPage";
+	   }
 	@RequestMapping(value="/special/makeSpecialPageAction.do",method = RequestMethod.GET)
 	@ResponseBody
 	public String makeSpecialPageAction() throws Exception{

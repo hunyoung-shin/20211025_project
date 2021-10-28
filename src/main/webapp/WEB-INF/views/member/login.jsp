@@ -35,7 +35,7 @@
 					data:param,
 					success: function(data, textStatus, jqXHR){
 						if(data.success == "1"){
-							location.href ="/board/boardList.do";
+							location.href ="/special/list.do";
 						}
 						else if(data.success == "2"){
 							alert("존재하지 않는 아이디입니다.");
