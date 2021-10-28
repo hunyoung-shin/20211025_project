@@ -12,48 +12,48 @@ import com.spring.special.vo.SpecialVo;
 
 @Service
 public class SpecialServiceImpl implements SpecialService{
-	
+
 	@Autowired
 	SpecialDao specialDao;
-	
+
 	@Override
 	public void test()throws Exception{};
-	
+
 	@Override
 	public List<SpecialVo> selectList() throws Exception{
-		
+
 		return specialDao.selectList();
-		
+
 	}
 	@Override
 	public SpecialVo speicalView(SpecialVo specialVo)throws Exception{
 		return specialDao.specialView(specialVo);
 	};
-	
+
 	@Override
 	public int speicalInsert(SpecialVo specialVo)throws Exception{
-	
+
 		return specialDao.speicalInsert(specialVo);
 	}
 	@Override
-	   public int specialDelete(SpecialVo specialVo) throws Exception {
-	      // TODO Auto-generated method stub
-	      return specialDao.specialDelete(specialVo);
-	   }
-	
+	public int specialDelete(SpecialVo specialVo) throws Exception {
+		// TODO Auto-generated method stub
+		return specialDao.specialDelete(specialVo);
+	}
+
 	@Override
 	public List<BrandVo> s_themeList()throws Exception{
 		return specialDao.s_themeList();
 	}
-	
+
 	@Override
 	public List<SpecialVo> s_specialList()throws Exception{
 		return specialDao.s_specialList();
 	}
-	
+
 	@Override
 	public List<BrandVo> s_brandList()throws Exception{
 		return specialDao.s_brandList();
-		
+
 	}
 }
