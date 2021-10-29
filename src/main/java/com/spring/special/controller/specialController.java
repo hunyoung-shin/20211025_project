@@ -1,5 +1,6 @@
 package com.spring.special.controller;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.multipart.MultipartRequest;
 
 import com.spring.brand.vo.BrandVo;
 import com.spring.common.CommonUtil;
@@ -119,9 +121,11 @@ public class specialController {
 	private ServletContext context;
 	
 	@RequestMapping(value="/special/makeSpecialPageAction.do",method = RequestMethod.POST)
-	@ResponseBody
 	public String makeSpecialPageAction(SpecialVo specialVo, MultipartHttpServletRequest request,
 			HttpServletResponse response, Model model) throws Exception{
+		
+		response.setCharacterEncoding("UTF-8");
+		request.setCharacterEncoding("UTF-8");
 		
 		HashMap<String, String> result = new HashMap<String, String>();
 	    CommonUtil commonUtil = new CommonUtil();
@@ -137,6 +141,8 @@ public class specialController {
 		String linkImgName = time + linkImgFile.getOriginalFilename();
 		
 		String filePath = context.getRealPath("/WEB-INF/uploadFiles/");
+		// filePath 확인용 출력장치
+		System.out.println(filePath);
 		
 		try {
 			FileOutputStream fos = new FileOutputStream(filePath + imgName);
@@ -151,36 +157,39 @@ public class specialController {
 				fos.write(buffer, 0, readCount);
 					// 위에서 생성한 fileOutputStream 객체에 출력하기를 반복한다
 			}
+			fos.close();
 			specialVo.setS_imagePath(filePath + imgName);
 			
 			FileOutputStream fos2 = new FileOutputStream(filePath + linkImgName);
 			InputStream is2 = linkImgFile.getInputStream();
-			readCount = 0;
+			int readCount2 = 0;
 			byte[] buffer2 = new byte[16384];
-			while ((readCount = is2.read(buffer)) != -1) {
-				fos.write(buffer2, 0, readCount);
+			while ((readCount2 = is2.read(buffer2)) != -1) {
+				fos2.write(buffer2, 0, readCount2);
 			}
+			fos2.close();
 			specialVo.setS_linkImgPath(filePath + linkImgName);
 			
 			int resultCnt = specialService.specialInsert(specialVo);
-			result.put("success", (resultCnt > 0)?"Y":"N");
-		    String callbackMsg = commonUtil.getJsonCallBackString(" ",result);
-		      
-		    System.out.println("callbackMsg::"+callbackMsg);
-		      
-		    return callbackMsg;
+//			result.put("success", (resultCnt > 0)?"Y":"N");
+//		    String callbackMsg = commonUtil.getJsonCallBackString(" ",result);
+//		      
+//		    System.out.println("callbackMsg::"+callbackMsg);
+//		      
+//		    return callbackMsg;
 			
 		} catch (Exception e) {
 			
 			e.printStackTrace();
-			int resultCnt = 0;
-			result.put("success", (resultCnt > 0)?"Y":"N");
-		    String callbackMsg = commonUtil.getJsonCallBackString(" ",result);
-		      
-		    System.out.println("callbackMsg::"+callbackMsg);
-		      
-		    return callbackMsg;
+//			int resultCnt = 0;
+//			result.put("success", (resultCnt > 0)?"Y":"N");
+//		    String callbackMsg = commonUtil.getJsonCallBackString(" ",result);
+//		      
+//		    System.out.println("callbackMsg::"+callbackMsg);
+//		      
+//		    return callbackMsg;
 		}
+		return "redirect:/special/list.do";
 	}
 
 	//DELETE

@@ -9,6 +9,7 @@
 <title>기획전 추가 페이지</title>
 </head>
 <script>
+	
 	$j(document).ready(function(){
 		
 		$j("#selectBrand").change(function(){
@@ -19,38 +20,11 @@
 			var value = $j("#selectTheme").val()
 			$j("#s_theme").val(value);
 		});
-		
-		$j("#submit").on("click",function(){
-			
-			var $frm = $j('.makeSpecialPage :input');
-      		var param = $frm.serialize();
-      		
-      		$j.ajax({
-			    url : "/special/makeSpecialPageAction.do",
-			    dataType: "json",
-			    type: "POST",
-			    data : param,
-			    enctype : 'multipart/form-data',
-			    processData: false,
-			    contentType: false,
-			    success: function(data, textStatus, jqXHR)
-			    {
-					alert("작성완료");
-					
-					alert("메세지:"+data.success);
-					
-					location.href = "/special/list.do";
-			    },
-			    error: function (jqXHR, textStatus, errorThrown)
-			    {
-			    	alert("실패");
-			    }
-      		})
-		});
 	});
+	
 </script>
 <body>
-<form class="makeSpecialPage" name="makeSpecialPage" method="post" enctype="multipart/form-data">
+<form action="/special/makeSpecialPageAction.do" method="post" enctype="multipart/form-data">
 	<table border ="1" id ='myTable' align='center'>
 		<tr>
 			<td width="120" align="center">
@@ -112,8 +86,8 @@
 		</tr>
 		<tr>
 			<td align="right" colspan="2">
-				<input id="submit" type="button" value="기획전 작성">
-				<input type="button" value="리스트" onclick="location.href='/special/list.do'">
+				<input type="submit" value="기획전 작성">
+				<input type="button" value="리스트" onclick="location.href='redirect:/special/list.do';">
 			</td>
 		</tr>
 	</table>
