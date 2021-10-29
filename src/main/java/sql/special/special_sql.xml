@@ -4,10 +4,10 @@
 	<resultMap type="com.spring.special.vo.SpecialVo" id="specialVo">
     	<result property="s_num" 	column="SPECIAL_NUM"/>
     	<result property="s_title" 	column="SPECIAL_TITLE"/>
-    	<result property="s_image" 	column="SPECIAL_IMAGE"/>
+    	<result property="s_imagePath" 	column="SPECIAL_IMAGE"/>
     	<result property="s_theme" 	column="SPECIAL_THEME"/>
     	<result property="s_notice" 	column="SPECIAL_NOTICE"/>
-    	<result property="s_linkImg" 	column="LINK_IMG"/>
+    	<result property="s_linkImgPath" 	column="LINK_IMG"/>
     	<result property="s_brandId" 	column="BRAND_ID"/>
     </resultMap>
     
