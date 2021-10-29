@@ -29,10 +29,10 @@
 		<!-- Scripts -->
 		<script>
 			var str = "[";
-			str += ${sessionscope.brandInit};
+			str += ${sessionScope.brandInit};
 			str += "] ";
-			if(${sessionscope.brandInit}.length <= 10){
-				str += ${sessionscope.title};
+			if(${sessionScope.brandInit}.length <= 10){
+				str += ${sessionScope.title};
 			}
 			str += " | shopshop";
 			document.title = str;
@@ -49,9 +49,9 @@
 			<nav class="nav">
 				<ul>
 					<c:choose>
-						<c:when test="${not empty sessionscope.memberId}">
+						<c:when test="${not empty sessionScope.userId}">
 							<li>
-								${sessionscope.memberId } 님
+								${sessionScope.userName } 님
 							</li>
 							<li>
 								마이페이지
@@ -116,13 +116,13 @@
 					<form name="specialInfo" class="specialInfo">
 						<a href="/special/list.do">기획전</a>
 						<span>
-							> [${sessionscope.s_brandInit }] ${sessionscope.s_title }
+							> [${sessionScope.s_brandInit }] ${sessionScope.s_title }
 						</span>
 						<c:if test="${not empty sessionscope.s_brandInit }">
-							<input type="hidden" id="s_brandInit" value="${sessionscope.s_brandInit }">
+							<input type="hidden" id="s_brandInit" value="${sessionScope.s_brandInit }">
 						</c:if>
-						<c:if test="${not empty sessionscope.s_title }">
-							<input type="hidden" id="s_title" value="${sessionscope.s_title }">
+						<c:if test="${not empty sessionScope.s_title }">
+							<input type="hidden" id="s_title" value="${sessionScope.s_title }">
 						</c:if>
 					</form>
 				</article>

@@ -37,9 +37,9 @@
 			<nav class="nav">
 				<ul>
 					<c:choose>
-						<c:when test="${not empty sessionscope.userId}">
+						<c:when test="${not empty sessionScope.userId}">
 							<li>
-								${sessionscope.userName } 님
+								${sessionScope.userName } 님
 							</li>
 							<li>
 								마이페이지
