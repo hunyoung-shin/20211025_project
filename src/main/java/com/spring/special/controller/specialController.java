@@ -1,9 +1,16 @@
 package com.spring.special.controller;
 
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.inject.Inject;
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -108,18 +115,72 @@ public class specialController {
 		return "/special/makeSpecialPage";
 	}
 
+	@Inject
+	private ServletContext context;
+	
 	@RequestMapping(value="/special/makeSpecialPageAction.do",method = RequestMethod.POST)
-	public String makeSpecialPageAction(SpecialVo specialVo, MultipartHttpServletRequest request) throws Exception{
-
+	@ResponseBody
+	public String makeSpecialPageAction(SpecialVo specialVo, MultipartHttpServletRequest request,
+			HttpServletResponse response, Model model) throws Exception{
+		
+		HashMap<String, String> result = new HashMap<String, String>();
+	    CommonUtil commonUtil = new CommonUtil();
+		
 		MultipartFile imgFile = request.getFile("s_image");
 		MultipartFile linkImgFile = request.getFile("s_linkImg");
 		
-		// 파일 저장 후 경로를 vo에 저장
+		//timestamp를 이용하여 고유파일명 부여
+		Calendar cal = Calendar.getInstance();
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd_HHmmSS");
+		String time = dateFormat.format(cal.getTime());
+		String imgName = time + imgFile.getOriginalFilename();
+		String linkImgName = time + linkImgFile.getOriginalFilename();
 		
-		int resultCnt = specialService.specialInsert(specialVo);
+		String filePath = context.getRealPath("/WEB-INF/uploadFiles/");
 		
-		
-		return "redirect:/special/list";
+		try {
+			FileOutputStream fos = new FileOutputStream(filePath + imgName);
+			InputStream is = imgFile.getInputStream();
+			int readCount = 0;
+			byte[] buffer = new byte[16384];
+	        	// 파일을 읽을 크기 만큼의 buffer를 생성하고
+				// ( 보통 1024, 2048, 4096, 8192 와 같이 배수 형식으로 버퍼의 크기를 잡는 것이 일반적이다.)
+	            
+			while ((readCount = is.read(buffer)) != -1) {
+				//  파일에서 가져온 fileInputStream을 설정한 크기 (1024byte) 만큼 읽고
+				fos.write(buffer, 0, readCount);
+					// 위에서 생성한 fileOutputStream 객체에 출력하기를 반복한다
+			}
+			specialVo.setS_imagePath(filePath + imgName);
+			
+			FileOutputStream fos2 = new FileOutputStream(filePath + linkImgName);
+			InputStream is2 = linkImgFile.getInputStream();
+			readCount = 0;
+			byte[] buffer2 = new byte[16384];
+			while ((readCount = is2.read(buffer)) != -1) {
+				fos.write(buffer2, 0, readCount);
+			}
+			specialVo.setS_linkImgPath(filePath + linkImgName);
+			
+			int resultCnt = specialService.specialInsert(specialVo);
+			result.put("success", (resultCnt > 0)?"Y":"N");
+		    String callbackMsg = commonUtil.getJsonCallBackString(" ",result);
+		      
+		    System.out.println("callbackMsg::"+callbackMsg);
+		      
+		    return callbackMsg;
+			
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+			int resultCnt = 0;
+			result.put("success", (resultCnt > 0)?"Y":"N");
+		    String callbackMsg = commonUtil.getJsonCallBackString(" ",result);
+		      
+		    System.out.println("callbackMsg::"+callbackMsg);
+		      
+		    return callbackMsg;
+		}
 	}
 
 	//DELETE

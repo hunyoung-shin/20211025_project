@@ -150,7 +150,7 @@
 				<article class="specialTab">
 					<div class="tabContent">
 							탭(이벤트, 상품 종류)
-						</div>
+					</div>
 				</article>
 				<br/>
 				<article class="specialGoods">
