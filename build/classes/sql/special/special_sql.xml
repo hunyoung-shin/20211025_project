@@ -2,13 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="special">
 	<resultMap type="com.spring.special.vo.SpecialVo" id="specialVo">
-    	<result property="s_num" 	column="SPECIAL_NUM"/>
+    	<result property="s_Num" 	column="SPECIAL_NUM"/>
     	<result property="s_title" 	column="SPECIAL_TITLE"/>
     	<result property="s_imagePath" 	column="SPECIAL_IMAGE"/>
     	<result property="s_theme" 	column="SPECIAL_THEME"/>
     	<result property="s_notice" 	column="SPECIAL_NOTICE"/>
     	<result property="s_linkImgPath" 	column="LINK_IMG"/>
     	<result property="s_brandId" 	column="BRAND_ID"/>
+    	<result property="br_Name" 	column="BRAND_NAME"/>
     </resultMap>
     
     <resultMap type="com.spring.brand.vo.BrandVo" id="brandVo">
@@ -29,37 +30,21 @@
 		    ,SPECIAL_NOTICE
 		    ,LINK_IMG
 		    ,SPECIAL.BRAND_ID
-	    
+	    	,BRAND_NAME
 	    FROM
 		    SPECIAL,BRAND
 		    
 	    WHERE
 		    SPECIAL.BRAND_ID=BRAND.BRAND_ID
+		ORDER BY
+			SPECIAL_NUM
 	    
     </select>
     
     <!--디테일 페이지  -->
-    <select id="specialView" parameterType="com.spring.special.vo.SpecialVo" resultMap="specialVo">
-		SELECT
-			BAN_IMG
-			,GOODS_CLASSIFY
-			,GOODS_IMAGE  
-			,BRAND_NAME 
-			,GOODS_NAME  
-			,GOODS_PRICE
-			,GOODS_SALEPCT
-			,GOODS_LIKE
-			,GOODS_REVIEW
-			,GOODS_COLOR
+    <select id="specialView" parameterType="int" resultMap="specialVo">
 		
-		FROM
-			GOODS,BRAND,BANNER
-			
-		WHERE
-			GOODS.GOODS_NUM=BANNER.GOODS_NUM
-		AND
-			GOODS.BRAND_ID=BRAND.BRAND_ID
-			    	
+		<!-- 있다가 VIEW 페이지 필요한 정보 SPECIALVO에 넣을 수 있도록 설정할 것 -> SPECIALVO 뿐 아니라 다른것도 들어가야하니 여러번 왔다 갔다 하 것 -->
     </select>
     
     <!-- 기획전추가 -->

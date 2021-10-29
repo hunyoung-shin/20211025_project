@@ -1,6 +1,5 @@
 package com.spring.special.controller;
 
-import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
@@ -23,7 +22,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.multipart.MultipartRequest;
 
 import com.spring.brand.vo.BrandVo;
 import com.spring.common.CommonUtil;
@@ -40,39 +38,35 @@ public class specialController {
 	@RequestMapping(value="/special/list.do", method = RequestMethod.GET)
 	public String specialList(HttpSession session, Model model)throws Exception{
 
-		// xml파일까지 작성 후 실행 해볼 것 -> 중간중간 '지뢰' 있음
-		BrandVo brandVo = new BrandVo();
-		// brandVo 가져올 필요가 있음 -> theme도 brandVo에 넣어서 가져올 수 있도록(또는 새로 db table 생성)
-		List<String> themeList = new ArrayList<String>();
+		List<BrandVo> themeList = new ArrayList<BrandVo>();
 		List<SpecialVo> specialList = new ArrayList<SpecialVo>();
 		List<BrandVo> brandList = new ArrayList<BrandVo>();
-
-		/*
-		 * themeList = specialService.s_themeList(); specialList
-		 * =specialService.s_specialList(); brandList = specialService.s_brandList();
-		 */
-
-		/*service에서 db까지 왔다갔다 할 3개
-		 brandVo
-		 themeList
-		 specialList
-		 */
-
-		// model에 적용 (theme이랑 special도)
-		model.addAttribute("brandVo", brandVo);
+	      
+		try {
+			themeList = specialService.s_themeList(); 
+			brandList = specialService.s_brandList();
+			specialList = specialService.selectList(); 
+	         
+			model.addAttribute("brandList", brandList);
+			model.addAttribute("themeList", themeList);
+			model.addAttribute("specialList", specialList);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 		return "/special/list";
 	}
 
 	//VIEW
-	@RequestMapping(value="/special/{s_num}/view.do", method = RequestMethod.GET)
-	public String specialview(HttpSession session, SpecialVo specialVo
-			,@RequestParam("s_num")int s_num)throws Exception{
+	@RequestMapping(value="/special/{s_Num}/view.do", method = RequestMethod.GET)
+	public String specialview(HttpSession session
+			,@RequestParam("s_Num")int s_Num, Model model)throws Exception{
 
 		try {
-			SpecialVo view = new SpecialVo();
-			view.setS_Num(s_num);
-			view = specialService.specialView(specialVo);
+			SpecialVo specialVo = new SpecialVo();
+			specialVo.setS_Num(s_Num);
+			specialVo = specialService.specialView(s_Num);
 			
 			session.setAttribute("s_title", specialVo.getS_title());
 //			session.setAttribute("s_brandInit", specialVo.getS_brandInit());
@@ -124,6 +118,7 @@ public class specialController {
 	public String makeSpecialPageAction(SpecialVo specialVo, MultipartHttpServletRequest request,
 			HttpServletResponse response, Model model) throws Exception{
 		
+		// 한글 깨짐 현상있음
 		response.setCharacterEncoding("UTF-8");
 		request.setCharacterEncoding("UTF-8");
 		

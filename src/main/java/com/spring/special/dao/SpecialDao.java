@@ -11,7 +11,7 @@ public interface SpecialDao {
 
 	public List<SpecialVo> selectList()throws Exception;
 
-	public SpecialVo specialView(SpecialVo specialVo)throws Exception;
+	public SpecialVo specialView(int s_Num)throws Exception;
 
 	public int speicalInsert(SpecialVo specialVo)throws Exception;
 

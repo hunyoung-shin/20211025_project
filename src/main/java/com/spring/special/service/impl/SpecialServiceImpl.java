@@ -26,8 +26,8 @@ public class SpecialServiceImpl implements SpecialService{
 
 	}
 	@Override
-	public SpecialVo specialView(SpecialVo specialVo)throws Exception{
-		return specialDao.specialView(specialVo);
+	public SpecialVo specialView(int s_Num)throws Exception{
+		return specialDao.specialView(s_Num);
 	};
 
 	@Override

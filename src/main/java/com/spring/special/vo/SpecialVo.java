@@ -12,6 +12,14 @@ public class SpecialVo {
 	private String s_notice;
 	private MultipartFile s_linkImg;
 	private String s_linkImgPath;
+	private String br_Name;
+	
+	public String getBr_Name() {
+		return br_Name;
+	}
+	public void setBr_Name(String br_Name) {
+		this.br_Name = br_Name;
+	}
 	public String getS_imagePath() {
 		return s_imagePath;
 	}
