@@ -73,6 +73,8 @@
 		    ,SPECIAL_NOTICE
 		    ,LINK_IMG 
 		    ,BRAND_ID
+		    ,BRAND_INIT
+		    ,CREATE_DATE
 		    )
 		VALUES
 			(
@@ -81,11 +83,18 @@
 	    		FROM
 	    			SPECIAL)
 			,#{s_title}
-			,#{s_image}
+			,#{s_imagePath}
 			,#{s_theme}
 			,#{s_notice}
-			,#{s_linkImg}
+			,#{s_linkImgPath}
 			,#{s_brandId}
+			,(SELECT
+					BRAND_INIT
+	    		FROM
+	    			BRAND
+	    		WHERE
+	    			BRAND_ID = #{s_brandId})
+	    	,SYSDATE
 			)
     </select>
     

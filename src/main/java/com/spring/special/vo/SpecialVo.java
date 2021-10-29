@@ -7,10 +7,32 @@ public class SpecialVo {
 	private int s_Num;
 	private String s_title;
 	private MultipartFile s_image;
+	private String s_imagePath;
 	private String s_theme;
 	private String s_notice;
 	private MultipartFile s_linkImg;
+	private String s_linkImgPath;
+	public String getS_imagePath() {
+		return s_imagePath;
+	}
+	public void setS_imagePath(String s_imagePath) {
+		this.s_imagePath = s_imagePath;
+	}
+	public String getS_linkImgPath() {
+		return s_linkImgPath;
+	}
+	public void setS_linkImgPath(String s_linkImgPath) {
+		this.s_linkImgPath = s_linkImgPath;
+	}
+	public String getS_brandInit() {
+		return s_brandInit;
+	}
+	public void setS_brandInit(String s_brandInit) {
+		this.s_brandInit = s_brandInit;
+	}
 	private String s_brandId;
+	private String s_brandInit;
+	
 	public int getS_Num() {
 		return s_Num;
 	}

@@ -88,7 +88,7 @@
 				기획전 링크용 이미지
 			</td>
 			<td>
-				<input type="file" id="s_linkImg">
+				<input type="file" id="s_linkImg" name="s_linkImg">
 			</td>
 		</tr>
 		<tr>

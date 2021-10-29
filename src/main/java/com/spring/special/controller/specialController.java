@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.spring.brand.vo.BrandVo;
 import com.spring.common.CommonUtil;
@@ -81,13 +82,6 @@ public class specialController {
 	@RequestMapping(value="/special/makeSpecialGoods.do", method = RequestMethod.GET)
 	public String makeSpecialGoods(SpecialVo specialVo, Model model) throws Exception{
 		
-//		
-//		SpecialVo view = new SpecialVo();
-//		view.setS_Num(s_num);
-//		view = specialService.speicalView(specialVo);
-//
-//		model.addAttribute("view", view);
-
 		return "special/makeSpecialGoods";
 	}
 
@@ -115,13 +109,12 @@ public class specialController {
 	}
 
 	@RequestMapping(value="/special/makeSpecialPageAction.do",method = RequestMethod.POST)
-	public String makeSpecialPageAction(SpecialVo specialVo) throws Exception{
+	public String makeSpecialPageAction(SpecialVo specialVo, MultipartHttpServletRequest request) throws Exception{
 
-		// 파일 처리 먼저 해야함
-		// 파일명
-		String imgName = specialVo.getS_image().getOriginalFilename();
-		String linkImgName = specialVo.getS_linkImg().getOriginalFilename();
+		MultipartFile imgFile = request.getFile("s_image");
+		MultipartFile linkImgFile = request.getFile("s_linkImg");
 		
+		// 파일 저장 후 경로를 vo에 저장
 		
 		int resultCnt = specialService.specialInsert(specialVo);
 		
