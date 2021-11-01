@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.spring.brand.vo.BrandVo;
 import com.spring.special.dao.SpecialDao;
 import com.spring.special.service.SpecialService;
+import com.spring.special.vo.BannerVo;
 import com.spring.special.vo.SpecialVo;
 
 @Service
@@ -29,11 +30,23 @@ public class SpecialServiceImpl implements SpecialService{
 	public SpecialVo specialView(int s_Num)throws Exception{
 		return specialDao.specialView(s_Num);
 	};
+	@Override
+	public BannerVo bannerView(int s_Num)throws Exception{
+		return specialDao.bannerView(s_Num);
+	}
+	@Override
+	public List<String> linkSelect(String br_Id)throws Exception{
+		return specialDao.linkSelect(br_Id);
+	}
 
 	@Override
 	public int specialInsert(SpecialVo specialVo)throws Exception{
 
 		return specialDao.speicalInsert(specialVo);
+	}
+	@Override
+	public int bannerInsert(BannerVo bannerVo)throws Exception{
+		return specialDao.bannerInsert(bannerVo);
 	}
 	@Override
 	public int specialDelete(SpecialVo specialVo) throws Exception {

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.spring.brand.vo.BrandVo;
 import com.spring.special.dao.SpecialDao;
+import com.spring.special.vo.BannerVo;
 import com.spring.special.vo.SpecialVo;
 
 @Repository
@@ -31,11 +32,26 @@ public class SpecialDaoImpl implements SpecialDao{
 
 		return session.selectOne("special.specialView", s_Num);
 	}
+	
+	@Override
+	public BannerVo bannerView(int s_Num)throws Exception{
+		
+		return session.selectOne("special.bannerView", s_Num);
+	}
+	@Override
+	public List<String> linkSelect(String br_Id)throws Exception{
+		return session.selectList("special.linkSelect", br_Id);
+	}
 
 	@Override
 	public int speicalInsert(SpecialVo specialVo)throws Exception{
 
 		return session.insert("special.specialInsert", specialVo);
+	}
+	@Override
+	public int bannerInsert(BannerVo bannerVo)throws Exception{
+		
+		return session.insert("special.bannerInsert", bannerVo);
 	}
 
 	@Override

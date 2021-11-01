@@ -152,7 +152,7 @@ ul {
 				<c:forEach items="${specialList}" var="s_list">
 					<li width=150px>
 						<a href="/special/${s_list.s_Num }/view.do"> 
-							<img src="${s_list.s_imagePath}" />
+							<img src="${s_list.main_img}" />
 								<div class=info>
 									<span class="title">
 										${s_list.s_title }

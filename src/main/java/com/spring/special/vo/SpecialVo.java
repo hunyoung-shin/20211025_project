@@ -1,36 +1,33 @@
 package com.spring.special.vo;
 
-import org.springframework.web.multipart.MultipartFile;
-
 public class SpecialVo {
 
 	private int s_Num;
 	private String s_title;
-	private MultipartFile s_image;
-	private String s_imagePath;
 	private String s_theme;
 	private String s_notice;
-	private MultipartFile s_linkImg;
-	private String s_linkImgPath;
+	private String br_Id;
 	private String br_Name;
+	private String main_img;	// 메인페이지용 이미지
 	
+	
+	public String getMain_img() {
+		return main_img;
+	}
+	public void setMain_img(String main_img) {
+		this.main_img = main_img;
+	}
+	public String getBr_Id() {
+		return br_Id;
+	}
+	public void setBr_Id(String br_Id) {
+		this.br_Id = br_Id;
+	}
 	public String getBr_Name() {
 		return br_Name;
 	}
 	public void setBr_Name(String br_Name) {
 		this.br_Name = br_Name;
-	}
-	public String getS_imagePath() {
-		return s_imagePath;
-	}
-	public void setS_imagePath(String s_imagePath) {
-		this.s_imagePath = s_imagePath;
-	}
-	public String getS_linkImgPath() {
-		return s_linkImgPath;
-	}
-	public void setS_linkImgPath(String s_linkImgPath) {
-		this.s_linkImgPath = s_linkImgPath;
 	}
 	public String getS_brandInit() {
 		return s_brandInit;
@@ -64,18 +61,6 @@ public class SpecialVo {
 	}
 	public void setS_notice(String s_notice) {
 		this.s_notice = s_notice;
-	}
-	public MultipartFile getS_image() {
-		return s_image;
-	}
-	public void setS_image(MultipartFile s_image) {
-		this.s_image = s_image;
-	}
-	public MultipartFile getS_linkImg() {
-		return s_linkImg;
-	}
-	public void setS_linkImg(MultipartFile s_linkImg) {
-		this.s_linkImg = s_linkImg;
 	}
 	public String getS_brandId() {
 		return s_brandId;

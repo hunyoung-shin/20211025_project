@@ -4,12 +4,11 @@
 	<resultMap type="com.spring.special.vo.SpecialVo" id="specialVo">
     	<result property="s_Num" 	column="SPECIAL_NUM"/>
     	<result property="s_title" 	column="SPECIAL_TITLE"/>
-    	<result property="s_imagePath" 	column="SPECIAL_IMAGE"/>
     	<result property="s_theme" 	column="SPECIAL_THEME"/>
     	<result property="s_notice" 	column="SPECIAL_NOTICE"/>
-    	<result property="s_linkImgPath" 	column="LINK_IMG"/>
-    	<result property="s_brandId" 	column="BRAND_ID"/>
+    	<result property="br_Id" 	column="BRAND_ID"/>
     	<result property="br_Name" 	column="BRAND_NAME"/>
+    	<result property="main_img" 	column="MAIN_IMG"/>
     </resultMap>
     
     <resultMap type="com.spring.brand.vo.BrandVo" id="brandVo">
@@ -19,46 +18,95 @@
     	<result property="br_Detail" 	column="BRAND_DETAIL"/>
     </resultMap>
     
+    <resultMap type="com.spring.special.vo.BannerVo" id="bannerVo">
+    	<result property="s_Num" 	column="SPECIAL_NUM"/>
+    	<result property="main_img" 	column="MAIN_IMG"/>
+    	<result property="link_img" 	column="LINK_IMG"/>
+    	<result property="ban_img" 	column="BAN_IMG"/>
+    	<result property="ban_video" 	column="BAN_VIDEO"/>
+    </resultMap>
+    
     
     <!-- 기획전페이지  -->
     <select id="specialList" parameterType="com.spring.special.vo.SpecialVo" resultMap="specialVo">
 	    SELECT
-		    SPECIAL_NUM
+		    SP.SPECIAL_NUM
 		    ,SPECIAL_TITLE
-		    ,SPECIAL_IMAGE
 		    ,SPECIAL_THEME
 		    ,SPECIAL_NOTICE
-		    ,LINK_IMG
-		    ,SPECIAL.BRAND_ID
+		    ,SP.BRAND_ID
 	    	,BRAND_NAME
+	    	,MAIN_IMG
 	    FROM
-		    SPECIAL,BRAND
-		    
-	    WHERE
-		    SPECIAL.BRAND_ID=BRAND.BRAND_ID
+		    BRAND BR
+            ,SPECIAL SP
+            ,BANNER BA
+        WHERE
+            BR.BRAND_ID = SP.BRAND_ID
+        AND
+            SP.SPECIAL_NUM = BA.SPECIAL_NUM
 		ORDER BY
-			SPECIAL_NUM
-	    
+			SP.SPECIAL_NUM;
     </select>
     
-    <!--디테일 페이지  -->
+    <!-- 디테일 페이지  -->
     <select id="specialView" parameterType="int" resultMap="specialVo">
-		
-		<!-- 있다가 VIEW 페이지 필요한 정보 SPECIALVO에 넣을 수 있도록 설정할 것 -> SPECIALVO 뿐 아니라 다른것도 들어가야하니 여러번 왔다 갔다 하 것 -->
+		SELECT
+			SP.SPECIAL_NUM
+		    ,SPECIAL_TITLE
+		    ,SPECIAL_THEME
+		    ,SPECIAL_NOTICE
+		    ,SP.BRAND_ID
+	    	,BR.BRAND_NAME
+	    	,BAN_IMG
+	    	,BAN_VIDEO
+		FROM
+		    BRAND BR
+            ,SPECIAL SP
+            ,BANNER BA
+        WHERE
+            BR.BRAND_ID = SP.BRAND_ID
+        AND
+            SP.SPECIAL_NUM = BA.SPECIAL_NUM
+		AND
+			SPECIAL_NUM = #{s_Num}
     </select>
     
-    <!-- 기획전추가 -->
+	<!-- 배너 불러오기 -->
+	<select id="bannerView" parameterType="int" resultMap="bannerVo">
+		SELECT
+			SPECIAL_NUM
+			,BAN_IMG
+			,BAN_VIDEO
+			,LINK_IMG
+		FROM
+			BANNER
+		WHERE
+			SPECIAL_NUM = #{s_Num}
+	</select>
+	
+	<!-- 링크이미지 가져오기 -->
+	<select id="linkSelect" parameterType="String" resultMap="java.util.List">
+		SELECT
+			LINK_IMG
+		FROM
+			BANNER BA
+			,BRAND BR
+		WHERE
+			BA.BRAND_ID = BR.BRAND_ID
+		AND
+			BA.BRAND_ID = #{br_Id}
+	</select>
+    
+    <!-- 기획전 정보 추가(배너 제외) -->
     <select id="specialInsert" parameterType="com.spring.special.vo.SpecialVo" >
     	INSERT INTO
     	SPECIAL(
 	    	SPECIAL_NUM
 		    ,SPECIAL_TITLE
-		    ,SPECIAL_IMAGE
 		    ,SPECIAL_THEME
 		    ,SPECIAL_NOTICE
-		    ,LINK_IMG 
 		    ,BRAND_ID
-		    ,BRAND_INIT
 		    ,CREATE_DATE
 		    )
 		VALUES
@@ -68,19 +116,29 @@
 	    		FROM
 	    			SPECIAL)
 			,#{s_title}
-			,#{s_imagePath}
 			,#{s_theme}
 			,#{s_notice}
-			,#{s_linkImgPath}
 			,#{s_brandId}
-			,(SELECT
-					BRAND_INIT
-	    		FROM
-	    			BRAND
-	    		WHERE
-	    			BRAND_ID = #{s_brandId})
 	    	,SYSDATE
 			)
+    </select>
+    <!-- 기획전 배너 추가 -->
+    <select id="bannerInsert" parameterType="com.spring.special.vo.BannerVo">
+    	INSERT INTO
+    	BANNER(
+    		SPECIAL_NUM
+			,MAIN_IMG 
+			,LINK_IMG 
+			,BAN_IMG 
+			,BAN_VIDEO
+    		)
+    	VALUES(
+    		${s_Num}
+    		,${main_img}
+    		,${link_img}
+    		,${ban_img}
+    		,${ban_video}
+    		)
     </select>
     
     <!-- 기획전삭제 -->

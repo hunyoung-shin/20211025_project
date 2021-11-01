@@ -73,7 +73,7 @@
             대표이미지
          </td>
          <td>
-            <input type="file" id="s_image" name="s_image">
+            <input type="file" id="main_imgFile" name="main_imgFile">
          </td> 
       </tr>
       <tr>
@@ -81,8 +81,24 @@
             기획전 링크용 이미지
          </td>
          <td>
-            <input type="file" id="s_linkImg" name="s_linkImg">
+            <input type="file" id="link_imgFile" name="link_imgFile">
          </td>
+      </tr>
+      <tr>
+      	<td>
+      		배너 이미지 (여기 수정 필요할 걸)
+      	</td>
+      	<td>
+			<input type="file" id="ban_imgFile" name="ban_imgFile" multiple >
+      	</td>
+      </tr>
+      <tr>
+      	<td>
+      		동영상 링크
+      	</td>
+      	<td>
+      		<input type="text" id="ban_video" name="ban_video" >
+      	</td>
       </tr>
       <tr>
          <td align="right" colspan="2">

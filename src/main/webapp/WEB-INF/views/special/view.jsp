@@ -127,22 +127,31 @@
 					</form>
 				</article>
 				<article class="imgBan">
-					<div class="innerImgBan">
-						<div class="contentImgBan">
-							<p>상품 이미지 배너 모음</p>
-		 					<%--	<c:forEach items="${ }" var="list"> --%>
-							<!-- 		asd -->
-							<%-- 	</c:forEach> --%>
-						</div>
-					</div>
+					<ul class="innerImgBan">
+						<c:forEach items="${bannerList }" var="b_list">
+							<li>
+								<img src="${b_list.ban_img}" />
+							</li>
+						</c:forEach>
+						<li>
+							<p>
+								동영상 위치
+<%-- 								${bannerList.ban_video } --%>
+							</p>
+						</li>
+					</ul>
 				</article>
 				<br/>
 				<article class="specialBan">
-					<div class="innerSpecialBan">
-						<div class="contentSpecialBan">
-							<p>브랜드 내 타 기획전 이동 이미지 배너(최근부터 최대 3개)</p>
-						</div>
-					</div>	
+					<ul class="innerSpecialBan">
+					<c:forEach items="${linkImgList }" var="l_List">
+						<li>
+							<a href="#">
+<%-- 여기 이렇게하면 안됨 -> 리스트 형태로 수정 또는 map형태로 	<img src="${l_List}" /> --%>
+							</a>
+						</li>
+					</c:forEach>
+					</ul>	
 				</article>
 				<hr/>
 				<br/>

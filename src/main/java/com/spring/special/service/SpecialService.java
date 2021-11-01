@@ -3,6 +3,7 @@ package com.spring.special.service;
 import java.util.List;
 
 import com.spring.brand.vo.BrandVo;
+import com.spring.special.vo.BannerVo;
 import com.spring.special.vo.SpecialVo;
 
 public interface SpecialService {
@@ -12,8 +13,14 @@ public interface SpecialService {
 	public List<SpecialVo> selectList()throws Exception;
 
 	public SpecialVo specialView(int s_Num)throws Exception;
+	
+	public BannerVo bannerView(int s_Num)throws Exception;
+	
+	public List<String> linkSelect(String br_Id)throws Exception;
 
 	public int specialInsert(SpecialVo specialVo)throws Exception;
+	
+	public int bannerInsert(BannerVo bannerVo)throws Exception;
 
 	public int specialDelete(SpecialVo specialVo) throws Exception;
 

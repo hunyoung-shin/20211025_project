@@ -26,6 +26,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.spring.brand.vo.BrandVo;
 import com.spring.common.CommonUtil;
 import com.spring.special.service.SpecialService;
+import com.spring.special.vo.BannerVo;
 import com.spring.special.vo.SpecialVo;
 
 @Controller
@@ -65,11 +66,20 @@ public class specialController {
 
 		try {
 			SpecialVo specialVo = new SpecialVo();
+			BannerVo bannerVo = new BannerVo();
+			List<String> linkImgList = new ArrayList<String>();
+			
 			specialVo.setS_Num(s_Num);
 			specialVo = specialService.specialView(s_Num);
+			bannerVo = specialService.bannerView(s_Num);
+			linkImgList = specialService.linkSelect(specialVo.getBr_Id());
 			
+			model.addAttribute("specialList", specialVo);
+			model.addAttribute("bannerList", bannerVo);
+			model.addAttribute("linkImgList", linkImgList);
+			
+			session.setAttribute("s_brandInit", specialVo.getS_brandInit());
 			session.setAttribute("s_title", specialVo.getS_title());
-//			session.setAttribute("s_brandInit", specialVo.getS_brandInit());
 			session.setMaxInactiveInterval(60*10);
 			session.getCreationTime();
 		}
@@ -115,33 +125,31 @@ public class specialController {
 	private ServletContext context;
 	
 	@RequestMapping(value="/special/makeSpecialPageAction.do",method = RequestMethod.POST)
-	public String makeSpecialPageAction(SpecialVo specialVo, MultipartHttpServletRequest request,
-			HttpServletResponse response, Model model) throws Exception{
+	public String makeSpecialPageAction(Model model, SpecialVo specialVo, BannerVo bannerVo,
+			MultipartHttpServletRequest request, HttpServletResponse response) throws Exception{
 		
-		// 한글 깨짐 현상있음
+		// 한글 깨짐 현상있음 -> 이미지 전부 배너에 옮기는게 좋을 듯 -> special은 ajax로, banner는 form action으로?
 		response.setCharacterEncoding("UTF-8");
 		request.setCharacterEncoding("UTF-8");
 		
-		HashMap<String, String> result = new HashMap<String, String>();
-	    CommonUtil commonUtil = new CommonUtil();
-		
-		MultipartFile imgFile = request.getFile("s_image");
-		MultipartFile linkImgFile = request.getFile("s_linkImg");
-		
-		//timestamp를 이용하여 고유파일명 부여
-		Calendar cal = Calendar.getInstance();
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd_HHmmSS");
-		String time = dateFormat.format(cal.getTime());
-		String imgName = time + imgFile.getOriginalFilename();
-		String linkImgName = time + linkImgFile.getOriginalFilename();
-		
-		String filePath = context.getRealPath("/WEB-INF/uploadFiles/");
-		// filePath 확인용 출력장치
-		System.out.println(filePath);
-		
 		try {
-			FileOutputStream fos = new FileOutputStream(filePath + imgName);
-			InputStream is = imgFile.getInputStream();
+			// ban_imgFile도 필요함
+			MultipartFile main_imgFile = request.getFile("main_imgFile");
+			MultipartFile link_imgFile = request.getFile("link_imgFile");
+			
+			//timestamp를 이용하여 고유파일명 부여
+			Calendar cal = Calendar.getInstance();
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd_HHmmSS");
+			String time = dateFormat.format(cal.getTime());
+			String mainImgName = time + main_imgFile.getOriginalFilename();
+			String linkImgName = time + link_imgFile.getOriginalFilename();
+			
+			String filePath = context.getRealPath("/WEB-INF/uploadFiles/");
+			// filePath 확인용 출력장치
+			System.out.println(filePath);
+			
+			FileOutputStream fos = new FileOutputStream(filePath + mainImgName);
+			InputStream is = main_imgFile.getInputStream();
 			int readCount = 0;
 			byte[] buffer = new byte[16384];
 	        	// 파일을 읽을 크기 만큼의 buffer를 생성하고
@@ -153,19 +161,21 @@ public class specialController {
 					// 위에서 생성한 fileOutputStream 객체에 출력하기를 반복한다
 			}
 			fos.close();
-			specialVo.setS_imagePath(filePath + imgName);
+			bannerVo.setMain_img(filePath + mainImgName);
 			
 			FileOutputStream fos2 = new FileOutputStream(filePath + linkImgName);
-			InputStream is2 = linkImgFile.getInputStream();
+			InputStream is2 = link_imgFile.getInputStream();
 			int readCount2 = 0;
 			byte[] buffer2 = new byte[16384];
 			while ((readCount2 = is2.read(buffer2)) != -1) {
 				fos2.write(buffer2, 0, readCount2);
 			}
 			fos2.close();
-			specialVo.setS_linkImgPath(filePath + linkImgName);
+			bannerVo.setLink_img(filePath + linkImgName);
 			
 			int resultCnt = specialService.specialInsert(specialVo);
+			resultCnt *= specialService.bannerInsert(bannerVo);
+			
 //			result.put("success", (resultCnt > 0)?"Y":"N");
 //		    String callbackMsg = commonUtil.getJsonCallBackString(" ",result);
 //		      
