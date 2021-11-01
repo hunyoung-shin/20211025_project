@@ -116,12 +116,17 @@ public class specialController {
 	@ResponseBody
 	public String makeSpecialPageAction(SpecialVo specialVo) throws Exception{
 		
+		System.out.println(specialVo.getS_title());
+		System.out.println(specialVo.getS_notice());
+		System.out.println(specialVo.getBr_Id());
+		System.out.println(specialVo.getS_theme());
+		
 		HashMap<String, String> result = new HashMap<String, String>();
 		CommonUtil commonUtil = new CommonUtil();
 		int resultCnt = specialService.specialInsert(specialVo);
 		result.put("success", (resultCnt > 0)?"Y":"N");
 		String callbackMsg = commonUtil.getJsonCallBackString(" ",result);
-		
+		System.out.println(callbackMsg);
 		return callbackMsg;
 	}
 	
@@ -177,6 +182,7 @@ public class specialController {
 			fos.close();
 			bannerVo.setLink_img(filePath + linkImgName);
 			
+			String ban_img = "";
 			for(int i = 0; i < a ; i++) {
 				fos = new FileOutputStream(banImgNameList[i]);
 				is = ban_imgFileList.get(i).getInputStream();
@@ -186,8 +192,10 @@ public class specialController {
 					fos.write(buffer, 0, readCount);
 				}
 				fos.close();
+				ban_img += banImgNameList[i] + ",";
 			}
-			bannerVo.setBan_img(banImgNameList.toString());
+			
+			bannerVo.setBan_img(ban_img);
 			
 			int resultCnt = specialService.bannerInsert(bannerVo);
 			
