@@ -103,7 +103,7 @@
       <tr>
          <td align="right" colspan="2">
             <input type="submit" value="기획전 작성">
-            <input type="button" value="리스트" onclick="location.href='redirect:/special/list.do';">
+            <input type="button" value="리스트" onclick="location.href='/special/list.do';">
          </td>
       </tr>
    </table>

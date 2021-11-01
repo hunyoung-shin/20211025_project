@@ -46,7 +46,7 @@
         AND
             SP.SPECIAL_NUM = BA.SPECIAL_NUM
 		ORDER BY
-			SP.SPECIAL_NUM;
+			SP.SPECIAL_NUM
     </select>
     
     <!-- 디테일 페이지  -->
@@ -69,7 +69,7 @@
         AND
             SP.SPECIAL_NUM = BA.SPECIAL_NUM
 		AND
-			SPECIAL_NUM = #{s_Num}
+			SP.SPECIAL_NUM = #{s_Num}
     </select>
     
 	<!-- 배너 불러오기 -->
@@ -86,7 +86,7 @@
 	</select>
 	
 	<!-- 링크이미지 가져오기 -->
-	<select id="linkSelect" parameterType="String" resultMap="java.util.List">
+	<select id="linkSelect" parameterType="String" resultType="hashmap">
 		SELECT
 			LINK_IMG
 		FROM
