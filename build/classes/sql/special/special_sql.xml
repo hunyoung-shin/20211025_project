@@ -131,13 +131,26 @@
 			,LINK_IMG 
 			,BAN_IMG 
 			,BAN_VIDEO
+			,BRAND_ID
     		)
     	VALUES(
-    		${s_Num}
+    		(SELECT
+					TO_NUMBER(NVL(MAX(SPECIAL_NUM),1))
+	    		FROM
+	    			SPECIAL)
     		,${main_img}
     		,${link_img}
     		,${ban_img}
     		,${ban_video}
+    		,(SELECT
+					BRAND_ID
+	    		FROM
+	    			SPECIAL
+	    		WHERE
+	  				SPECIAL_NUM = (SELECT
+                                        MAX(SPECIAL_NUM)
+                                    FROM
+                                        SPECIAL))
     		)
     </select>
     

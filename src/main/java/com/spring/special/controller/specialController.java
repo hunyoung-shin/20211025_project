@@ -43,50 +43,38 @@ public class specialController {
 		List<SpecialVo> specialList = new ArrayList<SpecialVo>();
 		List<BrandVo> brandList = new ArrayList<BrandVo>();
 	      
-		try {
-			themeList = specialService.s_themeList(); 
-			brandList = specialService.s_brandList();
-			specialList = specialService.selectList(); 
-	         
-			model.addAttribute("brandList", brandList);
-			model.addAttribute("themeList", themeList);
-			model.addAttribute("specialList", specialList);
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		themeList = specialService.s_themeList(); 
+		brandList = specialService.s_brandList();
+		specialList = specialService.selectList(); 
+         
+		model.addAttribute("brandList", brandList);
+		model.addAttribute("themeList", themeList);
+		model.addAttribute("specialList", specialList);
 
 		return "/special/list";
 	}
 
 	//VIEW
 	@RequestMapping(value="/special/{s_Num}/view.do", method = RequestMethod.GET)
-	public String specialview(HttpSession session
-			,@RequestParam("s_Num")int s_Num, Model model)throws Exception{
+	public String specialview(HttpSession session, @RequestParam("s_Num")int s_Num, Model model)throws Exception{
 
-		try {
-			SpecialVo specialVo = new SpecialVo();
-			BannerVo bannerVo = new BannerVo();
-			List<String> linkImgList = new ArrayList<String>();
-			
-			specialVo.setS_Num(s_Num);
-			specialVo = specialService.specialView(s_Num);
-			bannerVo = specialService.bannerView(s_Num);
-			linkImgList = specialService.linkSelect(specialVo.getBr_Id());
-			
-			model.addAttribute("specialList", specialVo);
-			model.addAttribute("bannerList", bannerVo);
-			model.addAttribute("linkImgList", linkImgList);
-			
-			session.setAttribute("s_brandInit", specialVo.getS_brandInit());
-			session.setAttribute("s_title", specialVo.getS_title());
-			session.setMaxInactiveInterval(60*10);
-			session.getCreationTime();
-		}
-		catch(Exception e) {
-			System.out.println("============================================");
-			System.out.println("에러는 : "+e.getMessage().toString());
-		}
+		SpecialVo specialVo = new SpecialVo();
+		BannerVo bannerVo = new BannerVo();
+		List<String> linkImgList = new ArrayList<String>();
+		
+		specialVo.setS_Num(s_Num);
+		specialVo = specialService.specialView(s_Num);
+		bannerVo = specialService.bannerView(s_Num);
+		linkImgList = specialService.linkSelect(specialVo.getBr_Id());
+		
+		model.addAttribute("specialList", specialVo);
+		model.addAttribute("bannerList", bannerVo);
+		model.addAttribute("linkImgList", linkImgList);
+		
+		session.setAttribute("s_brandInit", specialVo.getS_brandInit());
+		session.setAttribute("s_title", specialVo.getS_title());
+		session.setMaxInactiveInterval(60*10);
+		session.getCreationTime();
 
 		return "/special/view";
 	}
@@ -125,35 +113,51 @@ public class specialController {
 	private ServletContext context;
 	
 	@RequestMapping(value="/special/makeSpecialPageAction.do",method = RequestMethod.POST)
-	public String makeSpecialPageAction(Model model, SpecialVo specialVo, BannerVo bannerVo,
+	@ResponseBody
+	public String makeSpecialPageAction(SpecialVo specialVo) throws Exception{
+		
+		HashMap<String, String> result = new HashMap<String, String>();
+		CommonUtil commonUtil = new CommonUtil();
+		int resultCnt = specialService.specialInsert(specialVo);
+		result.put("success", (resultCnt > 0)?"Y":"N");
+		String callbackMsg = commonUtil.getJsonCallBackString(" ",result);
+		
+		return callbackMsg;
+	}
+	
+	@RequestMapping(value="/special/makePageImgAction.do",method = RequestMethod.POST)
+	public String makePageImgAction(SpecialVo specialVo, BannerVo bannerVo,
 			MultipartHttpServletRequest request, HttpServletResponse response) throws Exception{
 		
-		// 한글 깨짐 현상있음 -> 이미지 전부 배너에 옮기는게 좋을 듯 -> special은 ajax로, banner는 form action으로?
-		response.setCharacterEncoding("UTF-8");
-		request.setCharacterEncoding("UTF-8");
-		
 		try {
-			// ban_imgFile도 필요함
 			MultipartFile main_imgFile = request.getFile("main_imgFile");
 			MultipartFile link_imgFile = request.getFile("link_imgFile");
+			List<MultipartFile> ban_imgFileList = request.getFiles("ban_imgFile");
+			int a = ban_imgFileList.size();
 			
 			//timestamp를 이용하여 고유파일명 부여
 			Calendar cal = Calendar.getInstance();
 			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd_HHmmSS");
 			String time = dateFormat.format(cal.getTime());
+			
 			String mainImgName = time + main_imgFile.getOriginalFilename();
 			String linkImgName = time + link_imgFile.getOriginalFilename();
+			String[] banImgNameList = new String[a];
+			
 			
 			String filePath = context.getRealPath("/WEB-INF/uploadFiles/");
 			// filePath 확인용 출력장치
 			System.out.println(filePath);
 			
+			// 아래에 filepath 처리로 인해 여기서 Name 처리
+			for(int i = 0; i < a; i++) {
+				banImgNameList[i] = filePath + time + ban_imgFileList.get(i).getOriginalFilename();
+			}
+			
 			FileOutputStream fos = new FileOutputStream(filePath + mainImgName);
 			InputStream is = main_imgFile.getInputStream();
 			int readCount = 0;
 			byte[] buffer = new byte[16384];
-	        	// 파일을 읽을 크기 만큼의 buffer를 생성하고
-				// ( 보통 1024, 2048, 4096, 8192 와 같이 배수 형식으로 버퍼의 크기를 잡는 것이 일반적이다.)
 	            
 			while ((readCount = is.read(buffer)) != -1) {
 				//  파일에서 가져온 fileInputStream을 설정한 크기 (1024byte) 만큼 읽고
@@ -163,36 +167,33 @@ public class specialController {
 			fos.close();
 			bannerVo.setMain_img(filePath + mainImgName);
 			
-			FileOutputStream fos2 = new FileOutputStream(filePath + linkImgName);
-			InputStream is2 = link_imgFile.getInputStream();
-			int readCount2 = 0;
-			byte[] buffer2 = new byte[16384];
-			while ((readCount2 = is2.read(buffer2)) != -1) {
-				fos2.write(buffer2, 0, readCount2);
+			fos = new FileOutputStream(filePath + linkImgName);
+			is = link_imgFile.getInputStream();
+			readCount = 0;
+			buffer = new byte[16384];
+			while ((readCount = is.read(buffer)) != -1) {
+				fos.write(buffer, 0, readCount);
 			}
-			fos2.close();
+			fos.close();
 			bannerVo.setLink_img(filePath + linkImgName);
 			
-			int resultCnt = specialService.specialInsert(specialVo);
-			resultCnt *= specialService.bannerInsert(bannerVo);
+			for(int i = 0; i < a ; i++) {
+				fos = new FileOutputStream(banImgNameList[i]);
+				is = ban_imgFileList.get(i).getInputStream();
+				readCount = 0;
+				buffer = new byte[16384];
+				while ((readCount = is.read(buffer)) != -1) {
+					fos.write(buffer, 0, readCount);
+				}
+				fos.close();
+			}
+			bannerVo.setBan_img(banImgNameList.toString());
 			
-//			result.put("success", (resultCnt > 0)?"Y":"N");
-//		    String callbackMsg = commonUtil.getJsonCallBackString(" ",result);
-//		      
-//		    System.out.println("callbackMsg::"+callbackMsg);
-//		      
-//		    return callbackMsg;
+			int resultCnt = specialService.bannerInsert(bannerVo);
 			
 		} catch (Exception e) {
 			
 			e.printStackTrace();
-//			int resultCnt = 0;
-//			result.put("success", (resultCnt > 0)?"Y":"N");
-//		    String callbackMsg = commonUtil.getJsonCallBackString(" ",result);
-//		      
-//		    System.out.println("callbackMsg::"+callbackMsg);
-//		      
-//		    return callbackMsg;
 		}
 		return "redirect:/special/list.do";
 	}
