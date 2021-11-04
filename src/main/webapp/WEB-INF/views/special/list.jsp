@@ -84,7 +84,10 @@ ul {
 }
 </style>
 </head>
-<script src="//code.jquery.com/jquery-3.3.1.min.js">
+<!-- script import : src로 한번 불러오면 이 페이지 내에서는 계속 쓸 수 있음 -->
+<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+
+<script>
 	$(document).ready(function(){
 // 		$(".select").on("change", function(){
 				

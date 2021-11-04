@@ -4,7 +4,8 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>shop shop</title>
+		<!-- 타이틀 변경하려면 아래처럼 변수처리 후 controller에서 받아오는 형태로 해야 함 -->
+		<title>${title }</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<meta name="description" content="" />
