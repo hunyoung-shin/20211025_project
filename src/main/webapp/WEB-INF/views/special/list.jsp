@@ -136,28 +136,30 @@ ul {
 		<!-- Main -->
 		<section>
 			<article class="content">
-				<a href="/special/list.do">기획전 </a> <select name="theme">
+				<a href="/special/list.do">기획전 </a>
+				<select name="theme">
 					<option value="모든 테마">모든 테마</option>
-					<c:forEach items="${themeList}" var="t_list">
-						<option value="${t_list.br_Id}">${t_list.br_Name }</option>
+					<c:forEach items="${themeList}" var="tList">
+						<option value="${tList.br_Id}">${tList.br_Name }</option>
 					</c:forEach>
-				</select> <select name="brand">
+				</select>
+				<select name="brand">
 					<option value="모든 브랜드">모든 브랜드</option>
-					<c:forEach items="${brandList}" var="b_list">
-						<option value="${b_list.br_Id}">${b_list.br_Name }</option>
+					<c:forEach items="${brandList}" var="bList">
+						<option value="${bList.br_Id}">${bList.br_Name }</option>
 					</c:forEach>
 				</select>
 			</article>
 			<ul class="content">
-				<c:forEach items="${specialList}" var="s_list">
+				<c:forEach items="${specialList}" var="sList">
 					<li width=150px>
-						<a href="/special/${s_list.s_Num }/view.do"> 
-							<img src="${s_list.main_img}" />
+						<a href="/special/${sList.s_Num }/view.do"> 
+							<img src="${sList.main_img}" />
 								<div class=info>
 									<span class="title">
-										${s_list.s_title }
+										${sList.s_title }
 										<br>
-										${s_list.br_Name }
+										${sList.br_Name }
 									</span>
 								</div>
 						</a>

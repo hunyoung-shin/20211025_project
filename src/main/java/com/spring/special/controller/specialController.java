@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -54,17 +55,19 @@ public class specialController {
 		return "/special/list";
 	}
 
-	//VIEW
-	@RequestMapping(value="/special/{s_Num}/view.do", method = RequestMethod.GET)
-	public String specialview(HttpSession session, @RequestParam("s_Num")int s_Num, Model model)throws Exception{
+	//VIEW  : 참고) 왠만하면 parameter 이름에 <한글자 + '_'> 는 하지 말것 -> 그냥 '_'도 왠만하면 쓰지말 것
+	@RequestMapping(value="/special/{snum}/view.do", method = RequestMethod.GET)
+	public String specialview(HttpSession session, @PathVariable int snum, Model model)throws Exception{
 
 		SpecialVo specialVo = new SpecialVo();
 		BannerVo bannerVo = new BannerVo();
 		List<String> linkImgList = new ArrayList<String>();
 		
-		specialVo.setS_Num(s_Num);
-		specialVo = specialService.specialView(s_Num);
-		bannerVo = specialService.bannerView(s_Num);
+		System.out.println(snum);
+		
+		specialVo.setS_Num(snum);
+		specialVo = specialService.specialView(snum);
+		bannerVo = specialService.bannerView(snum);
 		linkImgList = specialService.linkSelect(specialVo.getBr_Id());
 		
 		model.addAttribute("specialList", specialVo);
@@ -76,7 +79,7 @@ public class specialController {
 		session.setMaxInactiveInterval(60*10);
 		session.getCreationTime();
 
-		return "/special/view";
+		return "special/view";
 	}
 
 	// 기획전내 상품 추가

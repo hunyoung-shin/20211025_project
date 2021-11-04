@@ -22,6 +22,7 @@
          $("#s_theme").val(value);
       });
       
+      // 참고)))) form action을 쓰면 encoding이 되지 않아 한글이 변환이 되지 않음 -> ajax를 이용하여 넘겨야 좋음...
       $("#pageAction").click(function(){
     	  var $frm = $(".makeSpecialPageAction :input");
     	  var param = $frm.serialize();
@@ -30,15 +31,16 @@
 			    dataType: "json",
 			    type: "POST",
 			    data : param,
+			    // 임시로 2개로 나눠놓음 -> 둘다 한번에 받아서 ajax를 사용하면 아마 인코딩 문제는 없을 것 -> 해결하면 불편하니 합치는게 좋을 듯..
 			    success: function(data, textStatus, jqXHR)
 			    {
-					if(data.success == 'Y'){
-						document.makePageImgAction.submit();
-					}
-					else{
-						alert('controller 이후실패');
-						alert(param);
-					}
+// 					if(data.success == 'Y'){
+// 						document.makePageImgAction.submit();
+// 					}
+// 					else{
+// 						alert('controller 이후실패');
+// 						alert(param);
+// 					}
 			    },
 			    error: function (jqXHR, textStatus, errorThrown)
 			    {

@@ -128,11 +128,11 @@
 				</article>
 				<article class="imgBan">
 					<ul class="innerImgBan">
-						<c:forEach items="${bannerList }" var="b_list">
-							<li>
-								<img src="${b_list.ban_img}" />
-							</li>
-						</c:forEach>
+<%-- 						<c:forEach items="${bannerList }" var="bList"> --%>
+<!-- 							<li> -->
+<%-- 								<img src="${bList.ban_img}" /> --%>
+<!-- 							</li> -->
+<%-- 						</c:forEach> --%>
 						<li>
 							<p>
 								동영상 위치
@@ -144,17 +144,16 @@
 				<br/>
 				<article class="specialBan">
 					<ul class="innerSpecialBan">
-					<c:forEach items="${linkImgList }" var="l_List">
+					<c:forEach items="${linkImgList }" var="lList">
 						<li>
 							<a href="#">
-<%-- 여기 이렇게하면 안됨 -> 리스트 형태로 수정 또는 map형태로 	<img src="${l_List}" /> --%>
+<%-- 여기 이렇게하면 안됨 -> 리스트 형태로 수정 또는 map형태로 	<img src="${lList}" /> --%>
 							</a>
 						</li>
 					</c:forEach>
 					</ul>	
 				</article>
 				<hr/>
-				<br/>
 				<hr/>
 				<article class="specialTab">
 					<div class="tabContent">
